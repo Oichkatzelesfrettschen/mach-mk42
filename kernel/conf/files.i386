@@ -1,0 +1,163 @@
+# 
+# Mach Operating System
+# Copyright (c) 1991,1990 Carnegie Mellon University
+# All Rights Reserved.
+# 
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+# 
+# CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS 
+# CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
+# ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+# 
+# Carnegie Mellon requests users of this software to return to
+# 
+#  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
+#  School of Computer Science
+#  Carnegie Mellon University
+#  Pittsburgh PA 15213-3890
+# 
+# any improvements or extensions that they make and grant Carnegie the
+# rights to redistribute these changes.
+#
+#
+# HISTORY
+# $Log:	files.i386,v $
+# Revision 2.12  91/02/05  17:05:14  mrt
+# 	Changed to new copyright
+# 	[91/01/28  14:47:43  mrt]
+# 
+# Revision 2.11  91/01/08  17:31:50  rpd
+# 	Switch wd8003 -> ns8390
+# 	[91/01/04  12:14:06  rvb]
+# 
+# Revision 2.10  90/12/14  10:59:25  jsb
+# 	ipsc/dev_forward_table.c -> ipsc/dev_forward_name.c
+# 	[90/12/14  09:01:30  jsb]
+# 
+# 	Added ipsc/dev_forward_table.c (for cross-node device support).
+# 	[90/12/14  08:26:54  jsb]
+# 
+# Revision 2.9  90/12/04  14:45:48  jsb
+# 	Replaced ipsc2 with ipsc386. Replaced i386ipsc2/ with i386ipsc/.
+# 	Moved rtc.c and usm.c to ipsc/, and pmap.c to intel/.
+# 	Added ipsc/node.c
+# 	[90/12/04  11:40:54  jsb]
+# 
+# Revision 2.8  90/11/26  14:48:31  rvb
+# 	Merge in I386q devices for autoconf.c
+# 	[90/11/26  11:12:12  rvb]
+# 
+# Revision 2.7  90/11/24  15:14:40  jsb
+# 	Added support for i386ipsc2 cnp ethernet driver.
+# 	[90/11/24  12:02:37  jsb]
+# 
+# Revision 2.6  90/10/01  14:22:42  jeffreyh
+# 	added wd8003 ethernet driver
+# 	[90/09/27  18:25:22  jeffreyh]
+# 
+# Revision 2.5  90/09/23  17:45:08  jsb
+# 	Fixed screwed up history messages.
+# 	[90/09/21  16:35:15  jsb]
+# 
+# 	Added files for ipsc2. Changed some other files from standard to at386.
+# 	[90/09/21  16:31:24  jsb]
+# 
+# Revision 2.4  90/08/27  21:47:26  dbg
+# 	Use idt.s instead of idt.c
+# 	[90/07/26            dbg]
+# 
+# 	Switch to new kernel debugger.
+# 	[90/07/20            dbg]
+# 
+# Revision 2.3  90/05/21  13:26:16  dbg
+# 	Add keyboard event driver, mouse, iopl device and io instruction
+# 	emulation.
+# 	[90/05/17            dbg]
+# 
+# Revision 2.2  90/05/03  15:19:01  dbg
+#	Created.
+# 
+
+intel/pmap.c		standard
+
+i386/bcopy.s		standard
+i386/bzero.s		standard
+i386/exec.c		standard
+i386/fpu.c		standard
+i386/gcc.s		standard
+i386/gdt.c		standard
+i386/hardclock.c	standard
+i386/i386_init.c	standard
+i386/idt.s		standard
+i386/init.c		standard
+i386/interrupt.s	standard
+i386/io_emulate.c	standard
+i386/io_map.c		standard
+i386/db_disasm.c	optional mach_kdb
+i386/db_interface.c	optional mach_kdb
+i386/db_trace.c		optional mach_kdb
+i386/ktss.c		standard
+i386/ldt.c		standard
+i386/loose_ends.c	standard
+i386/ntoh.s		standard
+i386/pic.c		standard
+i386/pit.c		standard
+i386/pcb.c		standard
+i386/phys.c		standard
+i386/read_fault.c	standard
+i386/setroot.c		standard
+i386/spl.s		standard
+i386/trap.c		standard
+i386/_setjmp.s		standard
+
+i386at/autoconf.c	optional at386
+i386at/blit.c		optional blit device-driver |${FORCE_VOLATILE}
+i386at/c765.c		optional fd device-driver
+i386at/com.c		optional com device-driver
+i386at/conf.c		optional at386
+i386at/hd.c		optional hd
+i386at/if_par.c		optional par device-driver
+i386at/if_3c501.c	optional at3c501 device-driver
+i386at/if_pc586.c	optional pc586 device-driver |${VOLATILE}
+i386at/if_ns8390.c	optional ns8390 device-driver
+i386at/iopl.c		optional at386
+i386at/kd.c		optional at386
+i386at/kdasm.s		optional at386
+i386at/kd_event.c	optional at386
+i386at/kd_mouse.c	optional at386
+i386at/kd_queue.c	optional at386
+i386at/lpr.c		optional lpr device-driver
+i386at/m765drv.c	optional fd device-driver
+i386at/m765knl.c	optional fd device-driver
+i386at/pic_isa.c	optional at386
+i386at/qd.c		optional qd device-driver
+i386at/rtc.c		optional at386
+i386at/wt.c		optional wt device-driver
+i386orc/ec.c		optional ec device-driver
+i386orc/evc1.c		optional evc device-driver
+i386orc/evc1font.c	optional evc device-driver
+
+i386ipsc/autoconf.c	optional ipsc386
+i386ipsc/conf.c		optional ipsc386
+i386ipsc/iopl.c		optional ipsc386
+i386ipsc/pic_ipsc.c	optional ipsc386
+i386ipsc/led.c		optional ipsc386 device-driver |${FORCE_VOLATILE}
+i386ipsc/sd.c		optional sd device-driver |${FORCE_VOLATILE}
+i386ipsc/sdintr.c	optional sd device-driver |${FORCE_VOLATILE}
+i386ipsc/dcm.c		optional dcm device-driver |${FORCE_VOLATILE}
+i386ipsc/dcm_route.s	optional dcm device-driver
+i386ipsc/if_cnp.c	optional cnp device-driver
+
+ipsc/rtc.c		optional ipsc386
+ipsc/node.c		optional ipsc386
+ipsc/dev_forward_name.c	optional ipsc386
+ipsc/usm.c		optional usm device-driver |${FORCE_VOLATILE}
+
+#
+# Dummy devices for now
+OPTIONS/ln		optional ln
+OPTIONS/ec		optional ec

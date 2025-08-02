@@ -1,0 +1,35 @@
+# Mach Operating System
+# Copyright (c) 1989 Carnegie-Mellon University
+# All rights reserved.  The CMU software License Agreement specifies
+# the terms and conditions for use and redistribution.
+# 
+# 
+# HISTORY
+# $Log:	Makeconf,v $
+# Revision 2.4  90/11/05  14:24:49  rpd
+# 	Added REG_EXP.
+# 	[90/10/29            rwd]
+# 
+# Revision 2.3  90/06/02  14:44:52  rpd
+# 	Export changed PATH and LPATH so the released mig is used.
+# 	[90/03/26  21:22:44  rpd]
+# 
+# Revision 2.2  89/10/16  15:21:50  rwd
+# 	First Checkin
+# 	[89/10/05  16:11:51  rwd]
+# 
+
+OBJECTDIR=../../../release/@sys/${BCSBBASE?$(BCSBBASE:t):latest}/include
+
+#
+# Put the release bin and lib on our paths,
+# so that we get the released mig/migcom.
+#
+
+PATH = ../bin:$(PATH)
+LPATH = ../lib:$(LPATH)
+
+I386_REG_EXP=.*
+REG_EXP=${$(TARGET_MACHINE)_REG_EXP?${$(TARGET_MACHINE)_REG_EXP}:*}
+
+.EXPORT : PATH LPATH

@@ -1,0 +1,99 @@
+/*
+ * Mach Operating System
+ * Copyright (c) 1991,1990,1989 Carnegie Mellon University
+ * All Rights Reserved.
+ * 
+ * Permission to use, copy, modify and distribute this software and its
+ * documentation is hereby granted, provided that both the copyright
+ * notice and this permission notice appear in all copies of the
+ * software, derivative works or modified versions, and any portions
+ * thereof, and that both notices appear in supporting documentation.
+ * 
+ * CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS 
+ * CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
+ * ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+ * 
+ * Carnegie Mellon requests users of this software to return to
+ * 
+ *  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
+ *  School of Computer Science
+ *  Carnegie Mellon University
+ *  Pittsburgh PA 15213-3890
+ * 
+ * any improvements or extensions that they make and grant Carnegie the
+ * rights to redistribute these changes.
+ */
+/*
+ * HISTORY
+ * $Log:	crt0.cv,v $
+ * Revision 2.5  91/02/14  14:18:22  mrt
+ * 	Added new Mach copyright
+ * 	[91/02/13  12:46:51  mrt]
+ * 
+ * Revision 2.4  90/11/05  14:35:48  rpd
+ * 	Removed the definition of exit.
+ * 	[90/10/30            rpd]
+ * 
+ * Revision 2.3  90/06/02  15:12:51  rpd
+ * 	Converted to new IPC.
+ * 	[90/03/26  23:27:20  rpd]
+ * 
+ * Revision 2.2  89/11/29  14:18:42  af
+ * 	Created.
+ * 	[89/10/26            af]
+ * 
+ */
+#include <varargs.h>
+
+/*
+ *	Object:
+ *		__start				EXPORTED function
+ *		environ				EXPORTED variable
+ *
+ *		C startup code
+ *
+ *
+ *	The kernel sets up the stack pointer to point to
+ *	"argc", which is followed by the argv values,
+ *	followed by a 0 (the end of the argv list),
+ *	followed by the environ values, followed by a 0.
+ *	Then all the strings that argv and environ point
+ *	to (first the argv ones, then the environ ones).
+ *
+ *	Some hackery in the Makefile will do the following
+ *	things for us:
+ *		set the GP register
+ *		pick the SP register and copy it to A0
+ *	neither one can be done by C (sigh).
+ *
+ *	This file compiles either into the normal crt0.o
+ *	version, or in the mcrt0.o one for profiling.
+ */
+va_list environ;
+
+int 	(*mach_init_routine)(),
+	(*_cthread_init_routine)(),
+	(*_cthread_exit_routine)();
+
+__start( sp )
+	register va_list sp;
+{
+	register unsigned argc;
+	register va_list argv;
+
+	argc = va_arg(sp, unsigned);
+	argv = sp;
+	environ = argv + (argc + 1) * sizeof(char *);
+
+	if (mach_init_routine)
+		(*mach_init_routine)();
+	if (_cthread_init_routine)
+		(*_cthread_init_routine)();
+
+	argc = main(argc, argv, environ);
+
+	if (_cthread_exit_routine)
+		(*_cthread_exit_routine)(argc);
+
+	exit(argc);
+}

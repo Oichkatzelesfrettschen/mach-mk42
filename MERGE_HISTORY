@@ -1,0 +1,2321 @@
+    
+    
+    
+==========================================================================
+   ***** MK Version MK31  (rwd) *****
+    
+    
+New features:
+--- --------
+
+Debugger has watchpoints.  Breakpoints are map specific.  New software
+reference bit code which is currently turned off by default.
+
+Bug fixes:
+--- -----
+
+Yes
+
+[I386]	All references to AT386 in makefiles have been duplicated to I386.
+
+Special notes:
+------- -----
+
+This merge was done with /afs/cs/project/mach/mach3/tools/bin/m3merge.
+mkmerge is dead.  long live m3merge.
+
+******** CUT HERE ******** summary of log messages ******** CUT HERE ********
+[ ./conf/version.edit ]
+31
+[ ./Makefile ]
+Don't make clean include area.
+[90/10/24            rwd]
+[ ./kernel/boot_ufs/boot_printf.c ]
+Modified boot_gets to allocate arrays from heap, not stack.
+[90/10/23            rpd]
+[ ./kernel/boot_ufs/file_io.c ]
+Modified open_file to allocate arrays from heap, not stack.
+[90/10/23            rpd]
+[ ./kernel/boot_ufs/load.c ]
+Modified boot_load_program and read_emulator_symbols
+to allocate arrays from heap, not stack.
+[90/10/23            rpd]
+[ ./MERGE_HISTORY ]
+Created
+[ ./kernel/conf/Makefile.template ]
+[ ./kernel/conf/files ]
+Added ddb/db_watch.c.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_break.c ]
+Added map field to breakpoints.
+Added map argument to db_set_breakpoint, db_delete_breakpoint,
+db_find_breakpoint.  Added db_find_breakpoint_here.
+[90/10/18            rpd]
+[ ./kernel/ddb/db_break.h ]
+Added map field to breakpoints.
+[90/10/18            rpd]
+[ ./kernel/ddb/db_command.c ]
+Changed db_fncall to print the result unsigned.
+[90/10/19            rpd]
+
+Added CS_MORE to db_watchpoint_cmd.
+[90/10/17            rpd]
+Added watchpoint commands: watch, dwatch, show watches.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_print.c ]
+Changed db_show_regs to print unsigned.
+[90/10/19            rpd]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+[ ./kernel/ddb/db_run.c ]
+Changed db_find_breakpoint to db_find_breakpoint_here.
+[90/10/18            rpd]
+
+Fixed db_set_single_step to pass regs to branch_taken.
+Added watchpoint argument to db_restart_at_pc.
+[90/10/17            rpd]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Added watchpoint support.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_sym.c ]
+Changed db_printsym to print unsigned.
+[90/10/19            rpd]
+[ ./kernel/ddb/db_trap.c ]
+From rpd.
+[90/10/19  17:03:17  rwd]
+
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Added watchpoint support.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_watch.c ]
+Made db_watchpoint_cmd parse a size argument.
+[90/10/17            rpd]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Created.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_watch.h ]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Created.
+[90/10/16            rpd]
+[ ./kernel/ddb/db_write_cmd.c ]
+Changed db_write_cmd to print unsigned.
+[90/10/19            rpd]
+[ ./kernel/device/ds_routines.c ]
+Let ds_device_write proceed w/o a valid reply port.  This is used
+by the unix server ether_output routine.
+[90/10/22            rwd]
+Fixed ds_write_done to use ds_device_write_inband_reply
+when appropriate.
+[90/10/18            rpd]
+Check for invalid reply ports.
+[90/10/17            rwd]
+[ ./kernel/i386/db_interface.c ]
+Added watchpoint support.
+[90/10/18            rpd]
+
+Created.
+[90/07/25            dbg]
+[ ./kernel/i386/db_machdep.h ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/i386/trap.c ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/i386/trap.h ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/kern/debug.c ]
+Change sun3 debugger invocation.
+[90/10/17            rwd]
+[ ./kernel/kern/printf.c ]
+Purged uprintf.
+[90/10/21            rpd]
+[ ./kernel/kern/task.c ]
+From OSF: Add thread_block() to loop that forcibly terminates
+threads in task_terminate() to fix livelock.  Also hold
+reference to thread when calling thread_force_terminate().
+[90/10/19            rpd]
+[ ./kernel/kern/thread.c ]
+Added host_stack_usage and processor_set_stack_usage.
+[90/10/22            rpd]
+
+Removed pausing code in stack_alloc/stack_free.
+It was broken and it isn't needed.
+Added code to check how much stack is actually used.
+[90/10/21            rpd]
+[ ./kernel/mach_debug/mach_debug.defs ]
+Added processor_set_stack_usage.
+[90/10/22            rpd]
+[ ./kernel/mach_debug/mach_debug_types.defs ]
+Updated vm_info_region_t size.
+[90/10/17            rpd]
+[ ./kernel/mips/PMAX/devio.h ]
+Changed uprintf to printf.
+[90/10/21            rpd]
+[ ./kernel/mips/db_interface.c ]
+Support for watchpoints.
+[90/10/16            rpd]
+[ ./kernel/mips/db_machdep.h ]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Added watchpoint support.
+[90/10/16  21:09:42  rpd]
+[ ./kernel/mips/pmap.c ]
+Fixed the OSF pmap_protect fixes.
+[90/10/21            rpd]
+[ ./kernel/mips/trap.c ]
+Removed static from getreg_val.
+[90/10/17            rpd]
+Generalized the watchpoint support.
+[90/10/16            rwd]
+Added watchpoint support.
+[90/10/16            rpd]
+[ ./kernel/sun3/db_interface.c ]
+Added watchpoint support.
+[90/10/16            rwd]
+[ ./kernel/sun3/db_machdep.h ]
+Added watchpoint support.
+[90/10/16            rwd]
+[ ./kernel/sun3/pmap.c ]
+Change asm instructions to Debugger().
+[90/10/17            rwd]
+Added hardware_reference_bits runtime switch.
+[90/10/13            rpd]
+[ ./kernel/sun3/softint.c ]
+Always enable softints when a softcall request is done.
+[90/10/17            rwd]
+[ ./kernel/sun3/trap.c ]
+Fixed the map argument to db_find_watchpoint.
+Made the faultaddr argument to pagefault a vm_offset_t.
+[90/10/18            rpd]
+Added watchpoint support.
+[90/10/16            rwd]
+[ ./kernel/sun3/trap.h ]
+Added watchpoint support.
+[90/10/16            rwd]
+[ ./kernel/sundev/sd.c ]
+Changed uprintf to printf.
+[90/10/21            rpd]
+Remove excess debugging code.
+[90/10/21            rwd]
+[ ./kernel/sundev/st.c ]
+Changed uprintf to printf.
+[90/10/21            rpd]
+[ ./kernel/vax/db_interface.c ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/vax/db_machdep.h ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/vax/trap.c ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/vax/trap.h ]
+Added watchpoint support.
+[90/10/18            rpd]
+[ ./kernel/vm/memory_object.c ]
+Clean and not flush pages to lock request get moved to the
+inactive queue.
+[90/10/24            rwd]
+[ ./kernel/vm/vm_fault.c ]
+Turn software_reference_bits off by default.
+[90/10/25            rwd]
+
+Extended software_reference_bits to vm_fault_page.
+[90/10/24            rpd]
+Fixed vm_fault_page to clear the modify bit on zero-filled pages.
+[90/10/23            rpd]
+Added watchpoint debugger support.
+[90/10/16            rpd]
+Added software_reference_bits runtime switch.
+[90/10/13            rpd]
+Added watchpoint debugger support.
+[90/10/16            rpd]
+Added software_reference_bits runtime switch.
+[90/10/13            rpd]
+[ ./kernel/vm/vm_map.c ]
+Fixed bug in vm_map_enter that was introduced in 2.13.
+[90/10/21            rpd]
+[ ./kernel/vm/vm_page.h ]
+Removed the max_mapping field of pages.
+[90/10/22            rpd]
+[ ./kernel/vm/vm_resident.c ]
+Made vm_page_alloc_deactivate_behind TRUE.
+[90/10/24            rwd]
+
+Removed the max_mapping field of pages.
+[90/10/22            rpd]
+[ ./user/libmach/Makefile ]
+Add I386 fields.
+[90/10/24            rwd]
+    
+    
+    
+==========================================================================
+   ***** MK Version MK32  (rpd) *****
+    
+    
+New features:
+--- --------
+
+I added a ddb command to search memory for a value:
+	search [/bhl] addr value [mask] [,count]
+
+Randy added cthread_fork_{prepare,child,parent}.
+
+I added a patchable boolean, zone_check, that causes
+zfree to check the consistency of zone free lists.
+
+I changed the IPC reference-counting functions/macros
+to make it easier to debug reference-count problems.
+
+[SUN3]	  Picked up ie and xy drivers from NCSC.
+
+[I386]	  Picked up various goodies from Bob.
+The pc586 driver works now on both 386 and 486.
+The first 640K of memory is available now.
+The kernel tells DOS to warm boot upon reboot.
+The debugger prints five arguments to functions in traces.
+
+
+Bug fixes:
+--- -----
+
+I picked up dlb's vm_object_deallocate fix for a nasty race.
+
+I fixed vm_page_deactivate to not deactivate busy pages.
+(It can find busy pages on the active list when software_reference_bits
+is enabled.)  Now vm_page_deactivate requires that the page's
+object is locked.
+
+I ripped out vm_region_old_behavior.  Now vm_region() has the same
+semantics as in Mach 2.5.
+
+I fixed memory_object_terminate in the device pager
+to return a value.
+
+I fixed crt0.o so that it is usable by non-standalone programs.
+
+I fixed the assert macro so that it doesn't try to drop into ddb
+when already in ddb.
+
+I unified untimeout and untimeout_try, and fixed the related MP bugs.
+
+[PMAX]	  Fixed jmp_buf to have the standard size.
+
+
+Organizational changes:
+-------------- -------
+
+Randy fixed the Makefiles for STUMP.  This means you must use
+the alpha/beta make and cpp on non-386 machines.
+
+Randy added spin_lock_t and associated changes to cthreads.
+
+
+Special notes:
+------- -----
+
+The ddb search command might fail in interesting ways if it doesn't
+find the searched-for value.  This is because ddb doesn't always
+recover from touching bad memory.  The optional count argument
+limits the search.
+
+The cthread_fork_* functions aren't tested.
+
+
+
+[ ./conf/version.edit ]
+32
+[ ./user/libmach/Makefile ]
+Added start_float.s, for the Sun-3.
+[90/11/01            rpd]
+Added exit.c.
+[90/10/30            rpd]
+[ ./include/Makeconf ]
+Added REG_EXP.
+[90/10/29            rwd]
+[ ./include/Makefile ]
+Added machine/cthreads.h include file from libthreads.
+[90/11/01            rwd]
+Added REG_EXP.
+[90/10/29            rwd]
+[ ./kernel/Makeconf ]
+SUN->SUN3.
+[90/10/31            rwd]
+Added REG_EXP.
+[90/10/29            rwd]
+
+Change MACHINE to TARGET_MACHINE.
+[90/10/29            rwd]
+[ ./kernel/Makefile ]
+SUN->SUN3.
+[90/10/31            rwd]
+Change MACHINE to TARGET_MACHINE.
+[90/10/29            rwd]
+[ ./kernel/conf/MASTER.sun3 ]
+Added BWS.
+[90/10/26  17:01:06  rwd]
+[ ./kernel/conf/Makefile.template ]
+Added REG_EXP.
+[90/10/29            rwd]
+[ ./kernel/conf/buildconf.sun3 ]
+First use for 3.0
+[90/10/26            rwd]
+[ ./kernel/ddb/db_break.c ]
+Initialize db_breakpoints_inserted to TRUE.
+[90/11/04            rpd]
+[ ./kernel/ddb/db_watch.c ]
+Initialize db_watchpoints_inserted to TRUE.
+[90/11/04            rpd]
+[ ./kernel/device/dev_pager.c ]
+Fixed memory_object_terminate to return KERN_SUCCESS.
+[90/10/29            rpd]
+[ ./kernel/i386/bcopy.s ]
+Introduce bcopy16.  For 16bit copies to bus memory
+[90/11/02            rvb]
+[ ./kernel/i386/db_trace.c ]
+If we can not guess the number of args to a function, use 5 vs 0.
+[90/11/02            rvb]
+[ ./kernel/i386/i386_init.c ]
+Start first_addr at 0x1000 and define first available page 
+after the kernel's end as first_avail.
+Flush EXL.
+[90/09/05            rvb]
+[ ./kernel/i386/pmap.c ]
+Replace (va < vm_first_phys || va > vm_last_phys) with test
+using valid page.  Otherwise, video buffer memory is treated as
+valid memory and setting dirty bits leads to disasterous results.
+[90/11/05            rvb]
+
+Define pmap_valid_page: [0x1000..cnvmem * 1024) and
+			[first_avail..)
+as useable memory
+[90/09/05            rvb]
+[ ./kernel/i386/start.s ]
+Since we steal pages after esym for page tables, use first_avail
+to record the last page +1 that we stole.
+Tell bios to warm boot on reboot.
+[90/09/05            rvb]
+[ ./kernel/i386at/i82586.h ]
+Document error bits in Xmt and Rcv.
+[90/10/08            rvb]
+[ ./kernel/i386at/if_pc586.c ]
+Convert for pure kernel
+[90/11/02            rvb]
+
+Init scb and reset as per spec.  Use bcopy16 vs pc586copy as per spec.
+Accumulate counters at hwrst.  Add counters everywhere.
+Editing and style and consistency cleanup.
+Flush NOP's: this required major mods to hwrst and everything it
+called -- testing OK is not correct if the command is not COMPLETE.
+Lot's of code clean up in xmt, rcv, reqfd.
+Flush pc_softc_t "address" and pc586ehcpy.
+Handle loopback of our ownbroadcast.
+The rcv and xmt loops have been rewriten not copy sram
+to the t_packet buffer.  This yields a teriffic thruput
+improvement.
+Add Notes and sram map.
+[90/09/28            rvb]
+[ ./kernel/i386at/if_pc586.h ]
+Create 18 TBD's so that we can copy up a chain of
+mbuf's.
+[90/10/03            rvb]
+[ ./kernel/ipc/ipc_kmsg.c ]
+Changed ip_reference to ipc_port_reference.
+Changed ip_release to ipc_port_release.
+Use new io_reference and io_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_mqueue.c ]
+Use new io_reference and io_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_object.c ]
+Removed ipc_object_reference_macro, ipc_object_release_macro.
+Use new io_reference and io_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_object.h ]
+Removed ipc_object_reference_macro, ipc_object_release_macro.
+Created new io_reference, io_release macros.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_port.c ]
+Changed ip_release to ipc_port_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_port.h ]
+Added ipc_port_reference, ipc_port_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_pset.c ]
+Use new ips_reference and ips_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_pset.h ]
+Added ipc_pset_reference, ipc_pset_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_right.c ]
+Changed io_release to ipc_object_release.
+Changed ip_release to ipc_port_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/ipc_space.c ]
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/ipc/mach_msg.c ]
+Removed ipc_object_release_macro.
+Changed ip_reference to ipc_port_reference.
+Changed ip_release to ipc_port_release.
+Changed io_release to ipc_object_release.
+Use new io_reference and io_release.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/kern/assert.h ]
+Changed assert to use Assert instead of Debugger.
+[90/11/04            rpd]
+[ ./kernel/kern/debug.c ]
+Added Assert.
+[90/11/04            rpd]
+[ ./kernel/kern/ipc_mig.c ]
+Changed ip_reference to ipc_port_reference.
+Changed ip_release to ipc_port_release.
+Removed ipc_object_release_macro.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/kern/ipc_tt.c ]
+Changed ip_reference to ipc_port_reference.
+Use new ip_reference and ip_release.
+[90/10/29            rpd]
+[ ./kernel/kern/lock.h ]
+Added simple_lock_taken.
+[90/11/04            rpd]
+[ ./kernel/kern/mach_clock.c ]
+Unified untimeout and untimeout_try.
+[90/10/29            rpd]
+[ ./kernel/kern/syscall_subr.c ]
+Restored missing multiprocessor untimeout failure code.
+[90/10/29            rpd]
+[ ./kernel/kern/thread.c ]
+Unified untimeout and untimeout_try.
+[90/10/29            rpd]
+[ ./kernel/kern/time_out.h ]
+Changed untimeout to return boolean.
+[90/10/29            rpd]
+[ ./kernel/kern/zalloc.c ]
+Added zone_check option to zfree.
+[90/10/29            rpd]
+[ ./kernel/mips/PMAX/pm_tty.c ]
+Fixed untimeout usage.
+[90/10/29            rpd]
+[ ./kernel/src/mig/Makefile ]
+SUN->SUN3.
+[90/10/31            rwd]
+Change MACHINE to TARGET_MACHINE.
+[90/10/29            rwd]
+[ ./kernel/sun/conf.c ]
+Added ie and xy from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sundev/mbvar.h ]
+Change from NCSC for xydriver.
+[90/10/26            rwd]
+
+Altered for MACH_KERNEL.
+[88/03/22            dbg]
+[ ./kernel/sundev/xy.c ]
+change to use kalloc, kfree instead of sun_kmem_alloc, sun_kmem_free
+from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sundev/xy_conf.c ]
+3.0 changes from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_ie.c ]
+Changes for 3.0 from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_iereg.h ]
+Changes for 3.0 from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_ievar.h ]
+Changes for 3.0 from NCSC.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_mie.h ]
+First Checkin.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_obie.h ]
+First checkin.
+[90/10/26            rwd]
+[ ./kernel/sunif/if_tie.h ]
+First Checkin.
+[90/10/26            rwd]
+[ ./kernel/vm/vm_map.c ]
+Removed vm_region_old_behavior.
+[90/11/02            rpd]
+[ ./kernel/vm/vm_object.h ]
+Added vm_object_lock_taken.
+[90/11/04            rpd]
+[ ./kernel/vm/vm_pageout.c ]
+Modified vm_pageout_scan for new vm_page_deactivate protocol.
+[90/11/04            rpd]
+[ ./kernel/vm/vm_resident.c ]
+Changed vm_page_deactivate to remove busy pages from the page queues.
+Now it requires that the page's object be locked.
+[90/11/04            rpd]
+[ ./user/libmach/Makefile ]
+SUN->SUN3.
+[90/10/31            rwd]
+Change MACHINE to TARGET_MACHINE.
+[90/10/29            rwd]
+[ ./user/libmach/exit.c ]
+Created.
+[90/10/30            rpd]
+[ ./user/libmach/i386/crt0.c ]
+Removed the definition of exit.
+[90/10/30            rpd]
+[ ./user/libmach/mips/crt0.cv ]
+Removed the definition of exit.
+[90/10/30            rpd]
+[ ./user/libmach/mips/crt0.ss ]
+Removed the definition of exit.
+[90/10/30            rpd]
+[ ./user/libmach/setjmp.h ]
+Changed the mips jmp_buf definition to the normal size.
+[90/10/30            rpd]
+[ ./user/libmach/sun3/crt0.s ]
+Restored call to _exit if exit returns.
+Restored call to start_float.
+[90/11/01            rpd]
+Call exit instead of task_terminate.
+[90/10/30            rpd]
+[ ./user/libmach/sun3/start_float.s ]
+Created.
+[90/11/01            rpd]
+[ ./user/libmach/vax/crt0.cc ]
+Removed the definition of exit.
+[90/10/30            rpd]
+[ ./user/threads/Makefile ]
+Change MACHINE to TARGET_MACHINE.
+[90/10/29            rwd]
+[ ./user/threads/cprocs.c ]
+Added cproc_fork_{prepare,parent,child}.
+[90/11/02            rwd]
+
+Fix for positive stack growth.
+[90/11/01            rwd]
+
+Add spin_lock_t.
+[90/10/31            rwd]
+[ ./user/threads/cthread_internals.h ]
+Added spin_lock_t.
+[90/10/31            rwd]
+[ ./user/threads/cthreads.c ]
+Added cthread_fork_{prepare,parent,child}.
+[90/11/02            rwd]
+
+Add spin_lock_t.
+[90/10/31            rwd]
+[ ./user/threads/cthreads.h ]
+Include machine/cthreads.h.  Added spin_lock_t.
+[90/10/31            rwd]
+[ ./user/threads/i386/cthreads.h ]
+Created.
+[90/11/01            rwd]
+[ ./user/threads/malloc.c ]
+Added malloc_fork* code.
+[90/11/02            rwd]
+
+Add spin_lock_t.
+[90/10/31            rwd]
+[ ./user/threads/mips/cthreads.h ]
+Created.
+[90/11/01            rwd]
+[ ./user/threads/stack.c ]
+Fixed addr_range_check for new vm_region semantics.
+[90/11/02            rpd]
+[ ./user/threads/sun3/cthreads.h ]
+Created.
+[90/11/01            rwd]
+[ ./user/threads/sync.c ]
+Fix casting.  Use new macros.
+[90/10/31            rwd]
+[ ./user/threads/vax/cthreads.h ]
+Created.
+[90/11/01            rwd]
+[ ./kernel/conf/version.variant ]
+Changed XMK to MK.
+[ ./user/threads/stack.c ]
+Added cproc_stack_base.  Add stack_fork_child().
+[90/11/01            rwd]
+[ ./kernel/vm/vm_object.c ]
+From dlb@osf.org:
+If pager initialization is in progress (object->pager_created &&
+!object->pager_initialized), then vm_object_deallocate must wait
+for it to complete before terminating the object.  Because anything
+can happen in the interim, it must recheck its decision to terminate
+after the wait completes.
+[ ./kernel/ddb/db_command.c ]
+Added search.
+[90/11/06            rpd]
+[ ./kernel/ddb/db_examine.c ]
+Added db_search_cmd, db_search.
+[90/11/06            rpd]
+    
+    
+    
+==========================================================================
+   ***** MK Version MK33  (jsb) *****
+    
+    
+New features:
+--- --------
+
+[I386]	  Added cnp ethernet driver for i386ipsc2 (Intel Hypercube).
+
+Bug fixes:
+--- -----
+
+[I386]	  Fixed changes in MK32 which prevented STD+NORMA+iPSC2 from building.
+    
+    
+    
+==========================================================================
+   ***** MK Version MK34  (jsb) *****
+    
+    
+New features:
+--- --------
+
+Added i860 build support (for the hypercube). Details follow.
+The i860 and i860ipsc2 source directories will be added in a future merge.
+
+Added support to conf/Makefile.template for cross-compilation.
+I borrowed the not-otherwise-used KCC technology so that $(KCC)
+is used to build kernel files (and thus would be the cross
+compiler), whereas $(CC) is used to build things like genassym
+which run on the host (in this case, a i386). I fixed a couple
+cases in Makefile.template that didn't conform to this convention:
+vers.o is now compiled with $(KCC), and genassym is now compiled
+with $(CC). I also added work-arounds for the fact that we don't
+have a cross-ranlib or a cross-size.
+
+[I860]	  Added conf/MASTER.i860{,.local}, conf/{Makefile,files}.i860,
+	  and added i860 support to config, mach/machine.h, and
+	  sys/varargs.h.
+    
+    
+    
+==========================================================================
+   ***** MK Version MK35  (rvb) *****
+    
+    
+This is an I386 architecture release only.  It has been tested
+on an AT as well as the hypercube.
+
+No New features:
+--- --------
+
+Except possibly that the if_pc586.c is not timing dependent
+any more.
+
+The big deal about this release is that all the files in the 
+i386at directory and the files in Mach2.5 I386q are identical --
+that is all improvements in the mainline have been merged to
+the 3.0 code and vice versa.  NOTE:  the 3.0 com driver has 
+not been tested cause I did not have any hardware.  Also I
+have lpr and if_par drivers that I did not even install for
+the same reason.  (I needed to install com.c for the mouse
+support code.)
+
+ALSO, this release has the Prime copyrights changed to something
+less threatening, courtesy of Prime Computer Inc.
+
+Bug fix:
+The panic that rfr reported with the ram_to_ptr is no longer
+possible.
+
+
+
+    
+    
+    
+==========================================================================
+   ***** MK Version MK36  (jsb) *****
+    
+    
+New features:
+--- --------
+
+Merged in i860 support for iPSC Intel hypercube.
+
+Merged i860 and i386 pmap.{c,h} into new intel directory.
+
+Merged i860 and i386 ipsc support into new ipsc directory.
+
+Added ATSYS variable which can be used to override use of @sys
+in OBJECTDIR when cross-compiling.
+
+Changed ipsc2 references to ipsc386 or simply ipsc, as appropriate.
+
+Removed libmig.a workaround from conf/Makefile.template since the same
+thing can be acheived entirely within conf/Makefile.{machine}.
+    
+    
+    
+==========================================================================
+   ***** MK Version MK37  (af) *****
+    
+    
+New features:
+--- --------
+
+This merge brings freedom to PMAXen, there is now only one single file
+left in the kernel with a MIPSco Copyright on it: mips/softfp.s which
+is optional.  No DEC Copyright in sight, we only loose support for the
+2D/3D boxes [actually only the 2D, I have never seen a 3D].
+
+The entire mips/PMAX subdir is new, the only pieces I recovered are
+the code Joe wrote for the terminal emulator and the in-kernel ether 
+driver that Bob & I wrote/rewrote/rewrote....  Everything else is new.
+The various drivers are in various stages of "maturity": the ether is 
+rock-solid, the screen&serial line is quite robust.
+
+The SCSI driver is the one likely to need most fixes and additions.
+Among the missing features are:
+	- true SCSI-2 support and adherence to the standard
+	- disconnect/reconnect capability when more than one
+	  drive is on the bus
+In the PMAX case then there are still various misteries to be solved,
+one most annoying: if you do not tell the prom to "init" before rebooting
+it will get locked up in bus-error interrupts at the first synchronous
+data transfer.  Beats me why.  It also seems to me it is much slower than it
+needs to, but I won't measure it until I understand it.
+
+Added BSD/OSF labels to kernel.
+
+New cute font, and related tools.
+
+New 16 sec bootstrap: shows that you do not need two levels of boots
+to be flexible.  With this one you can boot any file on disk, follow
+symlinks, even cross-device links (but of a very weird type..) and
+all fits in 15 sectors.  Mostly C code.
+
+Added new header file for TAPE devices.  Not that it really works yet,
+but we'll get around that too.
+
+Enabled mapped ether by default.
+
+Added missing code to make the pmap pcache work.
+
+Changed pmap_reference_bits array encoding, saves a cycle in tlb_umiss
+as suggested by dbg.
+
+
+Bug fixes:
+--- -----
+
+MP-Bug fix from DLB to thread_suspend/resume.
+
+[i386]
+Fixed syscall_sw.h to be palatable to the GNU preproc.
+
+[PMAX]	
+Fixed rpd's register leak.  Added optional code to locore to zero temporary
+registers out of a syscall.
+Fix from Larry Allen: kernel thread were started with interrupts disabled.
+Fixed off-by-one in syscall emulation table size: Ultrix code does use
+syscall 257 too.
+Fixed memory sizing routine for 3max to clear memory: this way we won't
+get those misterious "dropped because of previous paging-errors".
+Various minor spot clean for new 3max proms.
+
+
+
+
+Organizational changes:
+-------------- -------
+
+[PMAX]
+The new 16 sector bootstrap is built make-ing in kernel/mips/boot.
+Be careful with this: with Berkeley labels you cannot anymore just
+dd any file in there: it now knows about partitioning.  See the
+Makefile for more info.
+
+
+Special notes:
+------- -----
+
+Booted on pmax(unnamed), 3max(testarossa), vax(nova), sun3(rocky)
+and i386(intel2)
+
+***************************************************
+The following files have been Defuncted:
+
+[ ./kernel/mips/symbols.raw ]
+[ ./kernel/mips/PMAX/ascreg.h ]
+[ ./kernel/mips/PMAX/cfb.c ]
+[ ./kernel/mips/PMAX/cfbreg.h ]
+[ ./kernel/mips/PMAX/dc7085cons.h ]
+[ ./kernel/mips/PMAX/dc_hdw.c ]
+[ ./kernel/mips/PMAX/dc_modem.c ]
+[ ./kernel/mips/PMAX/dc_tty.c ]
+[ ./kernel/mips/PMAX/devio.h ]
+[ ./kernel/mips/PMAX/ga.c ]
+[ ./kernel/mips/PMAX/ga.h ]
+[ ./kernel/mips/PMAX/gq.c ]
+[ ./kernel/mips/PMAX/gq.h ]
+[ ./kernel/mips/PMAX/gx.c ]
+[ ./kernel/mips/PMAX/gx.h ]
+[ ./kernel/mips/PMAX/fudge.h ]
+[ ./kernel/mips/PMAX/pm.h ]
+[ ./kernel/mips/PMAX/pm_graphics.c ]
+[ ./kernel/mips/PMAX/pm_hdw.h ]
+[ ./kernel/mips/PMAX/pm_lk201.c ]
+[ ./kernel/mips/PMAX/pm_lk201.h ]
+[ ./kernel/mips/PMAX/pm_ms.c ]
+[ ./kernel/mips/PMAX/pm_ms.h ]
+[ ./kernel/mips/PMAX/pm_switch.c ]
+[ ./kernel/mips/PMAX/pm_switch.h ]
+[ ./kernel/mips/PMAX/pm_tty.c ]
+[ ./kernel/mips/PMAX/pmax.c ]
+[ ./kernel/mips/PMAX/pmevent.h ]
+[ ./kernel/mips/PMAX/pmioctl.h ]
+[ ./kernel/mips/PMAX/qfont.c ]
+[ ./kernel/mips/PMAX/rzdisk.h ]
+[ ./kernel/mips/PMAX/scsi_asc.c ]
+[ ./kernel/mips/PMAX/scsi_data.c ]
+[ ./kernel/mips/PMAX/scsi_debug.h ]
+[ ./kernel/mips/PMAX/scsi_sii.c ]
+[ ./kernel/mips/PMAX/scsireg.h ]
+[ ./kernel/mips/PMAX/siireg.h ]
+[ ./kernel/mips/PMAX/stamp.h ]
+[ ./kernel/mips/PMAX/super.c ]
+[ ./kernel/mips/PMAX/scsivar.h ]
+
+The following files are new
+
+[ ./kernel/mips/PMAX/boot/Makefile ]
+[ ./kernel/mips/PMAX/boot/asm_misc.h ]
+[ ./kernel/mips/PMAX/boot/asm_misc.s ]
+[ ./kernel/mips/PMAX/boot/c_misc.c ]
+[ ./kernel/mips/PMAX/boot/dev.h ]
+[ ./kernel/mips/PMAX/boot/dir.h ]
+[ ./kernel/mips/PMAX/boot/disk_inode.h ]
+[ ./kernel/mips/PMAX/boot/fs.h ]
+[ ./kernel/mips/PMAX/boot/label.b ]
+[ ./kernel/mips/PMAX/boot/mkboot.c ]
+[ ./kernel/mips/PMAX/boot/primary_boot.c ]
+[ ./kernel/mips/PMAX/boot/start.s ]
+[ ./kernel/mips/PMAX/boot/test.c ]
+[ ./kernel/mips/PMAX/boot/ufs.c ]
+[ ./kernel/mips/PMAX/boot/ufs.h ]
+[ ./kernel/mips/PMAX/bt459.c ]
+[ ./kernel/mips/PMAX/bt459.h ]
+[ ./kernel/mips/PMAX/bt478.c ]
+[ ./kernel/mips/PMAX/bt478.h ]
+[ ./kernel/mips/PMAX/build_font.c ]
+[ ./kernel/mips/PMAX/cfb_hdw.c ]
+[ ./kernel/mips/PMAX/cfb_misc.c ]
+[ ./kernel/mips/PMAX/dc503.c ]
+[ ./kernel/mips/PMAX/dc503.h ]
+[ ./kernel/mips/PMAX/dz_7085.h ]
+[ ./kernel/mips/PMAX/dz_defs.h ]
+[ ./kernel/mips/PMAX/dz_hdw.c ]
+[ ./kernel/mips/PMAX/dz_tty.c ]
+[ ./kernel/mips/PMAX/ga_hdw.c ]
+[ ./kernel/mips/PMAX/gq_hdw.c ]
+[ ./kernel/mips/PMAX/gx_misc.c ]
+[ ./kernel/mips/PMAX/kernel_font.c ]
+[ ./kernel/mips/PMAX/kernel_font.data ]
+[ ./kernel/mips/PMAX/kn01.c ]
+[ ./kernel/mips/PMAX/kn01.h ]
+[ ./kernel/mips/PMAX/kn02.c ]
+[ ./kernel/mips/PMAX/kn02.h ]
+[ ./kernel/mips/PMAX/lk201.c ]
+[ ./kernel/mips/PMAX/lk201.h ]
+[ ./kernel/mips/PMAX/mapped_scsi.c ]
+[ ./kernel/mips/PMAX/mapped_scsi.h ]
+[ ./kernel/mips/PMAX/mouse.c ]
+[ ./kernel/mips/PMAX/pm_defs.h ]
+[ ./kernel/mips/PMAX/pm_hdw.c ]
+[ ./kernel/mips/PMAX/pm_misc.c ]
+[ ./kernel/mips/PMAX/pmad_aa.h ]
+[ ./kernel/mips/PMAX/pmag_ba.h ]
+[ ./kernel/mips/PMAX/pmaz_aa.h ]
+[ ./kernel/mips/PMAX/rz.c ]
+[ ./kernel/mips/PMAX/rz.h ]
+[ ./kernel/mips/PMAX/rz_disk.c ]
+[ ./kernel/mips/PMAX/rz_labels.h ]
+[ ./kernel/mips/PMAX/rz_tape.c ]
+[ ./kernel/mips/PMAX/screen.c ]
+[ ./kernel/mips/PMAX/screen.h ]
+[ ./kernel/mips/PMAX/screen_defs.h ]
+[ ./kernel/mips/PMAX/screen_switch.c ]
+[ ./kernel/mips/PMAX/screen_switch.h ]
+[ ./kernel/mips/PMAX/scsi.c ]
+[ ./kernel/mips/PMAX/scsi.h ]
+[ ./kernel/mips/PMAX/scsi2.h ]
+[ ./kernel/mips/PMAX/scsi_53C94.h ]
+[ ./kernel/mips/PMAX/scsi_53C94_hdw.c ]
+[ ./kernel/mips/PMAX/scsi_7061.h ]
+[ ./kernel/mips/PMAX/scsi_7061_hdw.c ]
+[ ./kernel/mips/PMAX/scsi_alldevs.c ]
+[ ./kernel/mips/PMAX/scsi_comm.c ]
+[ ./kernel/mips/PMAX/scsi_cpu.c ]
+[ ./kernel/mips/PMAX/scsi_defs.h ]
+[ ./kernel/mips/PMAX/scsi_disk.c ]
+[ ./kernel/mips/PMAX/scsi_jukebox.c ]
+[ ./kernel/mips/PMAX/scsi_optical.c ]
+[ ./kernel/mips/PMAX/scsi_printer.c ]
+[ ./kernel/mips/PMAX/scsi_rom.c ]
+[ ./kernel/mips/PMAX/scsi_scanner.c ]
+[ ./kernel/mips/PMAX/scsi_tape.c ]
+[ ./kernel/mips/PMAX/scsi_worm.c ]
+
+The following files have been modified:
+
+[ ./Directories/ALL ]
+[ ./Directories/mips ]
+[ ./include/Makefile ]
+[ ./kernel/conf/MASTER.mips ]
+[ ./kernel/conf/files.mips ]
+[ ./kernel/device/param.h ]
+[ ./kernel/device/tape_status.h ]
+[ ./kernel/device/tty_status.h ]
+[ ./kernel/kern/syscall_emulation.c ]
+[ ./kernel/kern/thread.c ]
+[ ./kernel/mach/i386/syscall_sw.h ]
+[ ./kernel/mips/PMAX/if_se.c ]
+[ ./kernel/mips/PMAX/if_se.h ]
+[ ./kernel/mips/PMAX/if_se_mapped.c ]
+[ ./kernel/mips/PMAX/mc_clock.c ]
+[ ./kernel/mips/PMAX/mips_box.c ]
+[ ./kernel/mips/PMAX/mips_box.h ]
+[ ./kernel/mips/PMAX/model_dep.c ]
+[ ./kernel/mips/PMAX/tc.c ]
+[ ./kernel/mips/PMAX/tc.h ]
+[ ./kernel/mips/autoconf.c ]
+[ ./kernel/mips/busses.c ]
+[ ./kernel/mips/busses.h ]
+[ ./kernel/mips/coff.h ]
+[ ./kernel/mips/conf.c ]
+[ ./kernel/mips/context.s ]
+[ ./kernel/mips/db_interface.c ]
+[ ./kernel/mips/db_mips_sym.c ]
+[ ./kernel/mips/exec.c ]
+[ ./kernel/mips/locore.s ]
+[ ./kernel/mips/mips_init.c ]
+[ ./kernel/mips/mips_misc.c ]
+[ ./kernel/mips/pcb.c ]
+[ ./kernel/mips/pmap.c ]
+[ ./kernel/mips/prom_interface.h ]
+[ ./kernel/mips/start.s ]
+[ ./kernel/mips/tlb.s ]
+[ ./kernel/mips/trap.c ]
+[ ./user/libmach/Makefile ]
+
+    
+    
+    
+==========================================================================
+   ***** MK Version MK38  (jsb) *****
+    
+    
+New features:
+--- --------
+
+Replaced uses of @sys in Makefiles and Makeconf with $(atsys).
+atsys is set to ATSYS if defined, @sys if not.
+
+[MACH_CLPORT]	Support for complex inter-node messages.
+
+[MACH_CLBOOT]	Support for transparent inter-node device access.
+
+[iPSC]		New dcm interface for MACH_CLPORT support.
+
+[iPSC]		Finished merge of i860 and i386 console driver (usm.c).
+    
+    
+    
+==========================================================================
+   ***** MK Version MK39  (jeffreyh) *****
+    
+    
+New features:
+--- --------
+
+Zone gc code has been picked up from OSF/1. All zones in the system
+are now collected. zchange now takes an extra argument for
+collectable. This is so you could turn collection off for a zone.
+
+
+[I386]   The 386 is now buildable using the gcc-cpp from MtXinu.
+         Several additions to the code for __STDC__ have been made.
+         Due to this work mig no longer generates prototypes for ansi C
+         and C++ in the generated header files. This is because the
+     	 prototypes in the headers were for the the client side only.
+         Kernel files that were including these headers would fail
+         to compile as the types and number of arguments to the
+	 functions was wrong. If prototypes are wanted for mig
+	 headers, mig must be made to generate both client and server
+  	 header files with apropriate prototypes.
+
+
+Bug fixes:
+--- -----
+
+[PMAX]	 scsi disk fixes from af
+
+A few others
+
+
+******** CUT HERE ******** summary of log messages ******** CUT HERE ********
+[ ./conf/version.edit ]
+39
+[ ./kernel/boot_ufs/def_pager_setup.c ]
+Added init for  default_partition_lock
+[90/12/11            jeffreyh]
+[ ./kernel/i386/asm.h ]
+changes for __STDC__
+[90/12/06            jeffreyh]
+[ ./kernel/i386/cswitch.s ]
+Changes for __STDC__
+
+Changes for __STDC__
+[90/12/07  15:45:37  jeffreyh]
+[ ./kernel/i386/interrupt.s ]
+Changes for __STDC__
+[90/12/07  15:43:38  jeffreyh]
+[ ./kernel/i386/locore.s ]
+Changes for __STDC__
+[90/12/07  15:43:29  jeffreyh]
+[ ./kernel/i386/pio.h ]
+changes for __STDC__
+[90/12/07            jeffreyh]
+[ ./kernel/i386/spl.s ]
+Changes for __STDC__
+[90/12/07            jeffreyh]
+[ ./kernel/i386/start.s ]
+Changes for __STDC__
+[90/12/07  15:43:21  jeffreyh]
+[ ./kernel/i386at/blit.c ]
+Changes for __STDC__
+[90/12/07            jeffreyh]
+[ ./kernel/i386at/if_pc586.c ]
+Changes for __STDC__
+[90/12/07            jeffreyh]
+[ ./kernel/ipc/ipc_init.c ]
+Changes to zchange to account for new collectable field. Made all
+ipc zones collectable.
+[90/12/11            jeffreyh]
+[ ./kernel/ipc/ipc_marequest.c ]
+Change zchange to match new number of arguments. Made zone collectable. 
+[90/12/11            jeffreyh]
+[ ./kernel/kern/zalloc.c ]
+[90/12/19  10:36:55  jeffreyh]
+[ ./kernel/kern/zalloc.h ]
+Merged in changes done by jvs@osf from OSF/1 
+[90/12/10            jeffreyh]
+[ ./kernel/mips/PMAX/rz.c ]
+Do not use minphys(), we do not need to trim requests.
+[90/12/11            af]
+[ ./kernel/mips/PMAX/rz_disk.c ]
+Bug in strategy routine: for xfers larger than
+max_dma was not setting the io_count right at
+the end of the transfer.  Now new fsck works.
+[90/12/10  17:26:47  af]
+[ ./kernel/mips/locore.s ]
+Fixed gimmeabreak() to let you sstep out of it.
+Long overdue, but I had this habit of putting a breakpoint
+where I wanted to stop anyways.
+[90/12/13            af]
+[ ./kernel/mips/PMAX/scsi_7061_hdw.c ]
+More hacks to understand rz55, and now hitachis boot.
+There is still one problem for hitachis at large,
+will fix in the next merge.
+[90/12/19  15:17:48  af]
+[ ./kernel/src/mig/header.c ]
+Commented out code for prototype generation. This is a temporary solution
+to the longer term problem of the need 
+for the generation of both a client and a server header file 
+that have correct prototypes for strict ansi c and c++. The
+prototypes generated before anly were for the client and broke kernel
+files that included them if compiled under standard gcc
+[90/12/07            jeffreyh]
+[ ./kernel/vm/vm_external.c ]
+Change zchange to accept new argument. Made zones collectable.
+[90/12/11            jeffreyh]
+    
+    
+    
+==========================================================================
+   ***** MK Version MK40  (rpd) *****
+    
+    
+New features:
+--- --------
+
+Kernel stack discarding and related optimizations.
+Currently a thread's kernel stack is discarded
+when it is created, when it is suspended,
+when it waits in a message receive, and when
+it waits for a reply to an exception_raise upcall.
+
+Threads without kernel stacks are "swapped".
+All runnable threads have kernel stacks.
+
+The vax and sun3 don't discard kernel stacks.
+In fact, they don't even unwire kernel stacks.
+MI code uses a KEEP_STACKS conditional (temporary,
+I hope) to support unconverted architectures.
+
+The i386 discards kernel stacks, but the implementation
+is suboptimal.  locore still saves user state on the
+kernel stack, so stack_switch() must copy user state
+to and from the kernel stack.
+
+[I386]	  I picked up Bob's v86 support.
+The IO permission bit implementation is suboptimal.
+It copies the IO permission bits into the kernel's TSS
+at every context-switch to a thread with bits set.
+
+I added a ddb command, continue-with-count (c/c).
+It continues, counting instructions, until a breakpoint is hit.
+On the pmax, loads and stores are also counted.
+
+I added a debugging call, host_virtual_physical_table_info,
+to return information about the VP hash table.
+The hash_info program in the USER tree uses it.
+
+I enabled software reference bits (again) and
+disabled TLB reference bits on the pmax (again).
+
+Bug fixes:
+--- -----
+
+I revised the way the network code allocates message buffers.
+It should drop fewer packets now.  This improves network
+performance significantly on some machines.
+
+I changed the zone package to make zones non-collectable by default.
+The only collectable zones now are the large kalloc zones.
+
+Numerous minor fixes, including stuff from Sandro & Bob...
+
+
+[ ./conf/version.edit ]
+40
+[ ./include/Makefile ]
+Added mach_debug/hash_info.h.
+[91/01/04            rpd]
+[ ./kernel/conf/MASTER ]
+Removed FAST_CSW (tag fast_csw).
+[90/12/08            rpd]
+Removed MACH_IPC_GENNOS (tag ipc_gennos).
+[90/11/08            rpd]
+[ ./kernel/conf/MASTER.mips ]
+Disabled ref_bits.  Again.
+[91/01/04            rpd]
+[ ./kernel/conf/files ]
+Removed ./mach/exc_user.c.
+[90/12/26            rpd]
+Removed FAST_CSW.
+[90/12/08            rpd]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ddb/db_break.c ]
+Added db_map_equal, db_map_current, db_map_addr.
+[90/11/10            rpd]
+[ ./kernel/ddb/db_run.c ]
+Fixed bug in db_restart_at_pc.
+[90/12/07            rpd]
+Added STEP_COUNT and count option to db_continue_cmd.
+Changed db_stop_at_pc to return (modified) is_breakpoint.
+Fixed db_stop_at_pc to print newlines in the right places.
+[90/11/27            rpd]
+[ ./kernel/ddb/db_trap.c ]
+Changed db_stop_at_pc's arguments.
+Print db_inst_count, db_load_count, db_store_count.
+[90/11/27            rpd]
+[ ./kernel/ddb/db_watch.c ]
+Use db_map_equal, db_map_current, db_map_addr.
+[90/11/10            rpd]
+[ ./kernel/device/dev_master.h ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/device/ds_routines.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/device/net_io.c ]
+Replaced NET_KMSG_GET, NET_KMSG_FREE
+with net_kmsg_get, net_kmsg_put, net_kmsg_collect.
+Increased net_kmsg_ilist_min to 4.
+[91/01/05            rpd]
+Fixed net_rcv_msg_thread to round message sizes up to an int multiple.
+[90/12/07            rpd]
+
+Fixed net_rcv_msg_thread to not set vm_privilege.
+[90/11/29            rpd]
+[ ./kernel/device/net_io.h ]
+Replaced NET_KMSG_GET, NET_KMSG_FREE
+with net_kmsg_get, net_kmsg_put, net_kmsg_collect.
+[91/01/05            rpd]
+[ ./kernel/device/subrs.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/i386/cswitch.s ]
+Minor cleanup.
+[90/12/31            rpd]
+Added switch_task_context, switch_thread_context.
+[90/12/12            rpd]
+
+Reorganized the pcb.
+[90/12/11            rpd]
+[ ./kernel/i386/db_machdep.h ]
+Added dummy inst_load/inst_store macros.
+[90/12/11            rpd]
+[ ./kernel/i386/db_trace.c ]
+Reorganized the pcb.
+[90/12/11            rpd]
+[ ./kernel/i386/fpu.c ]
+Split i386_machine_state off of i386_kernel_state.
+[90/12/31            rpd]
+Reorganized the pcb.
+[90/12/11            rpd]
+[ ./kernel/i386/genassym.c ]
+Reorganized the pcb.
+[90/12/11            rpd]
+[ ./kernel/i386/init.c ]
+Initialize the new pcb zone in machine_init.
+[90/12/11            rpd]
+[ ./kernel/i386/locore.s ]
+Replaced thread_bootstrap_user, thread_bootstrap_kernel
+with thread_exception_return, thread_syscall_return.
+Updated mach_trap_table indexing for new layout.
+[90/12/17            rpd]
+
+Renamed thread_bootstrap to thread_bootstrap_user.
+Added thread_bootstrap_kernel.
+[90/12/14            rpd]
+
+Reorganized the pcb.
+Added copyinmsg, copyoutmsg synonyms for copyin, copyout.
+[90/12/11            rpd]
+[ ./kernel/i386/pcb.c ]
+Removed pcb_synch.  Added pcb_collect.
+[91/01/03            rpd]
+
+Split i386_machine_state off of i386_kernel_state.
+Set k_stack_top correctly for V8086 threads.
+[90/12/31            rpd]
+Added stack_switch.  Moved stack_alloc_try, stack_alloc,
+stack_free, stack_statistics to kern/thread.c.
+[90/12/14            rpd]
+
+Reorganized the pcb.
+Added stack_attach, stack_alloc, stack_alloc_try,
+stack_free, stack_statistics.
+[90/12/11            rpd]
+[ ./kernel/i386/read_fault.c ]
+Changed VM_WAIT to VM_PAGE_WAIT.
+[90/12/11            rpd]
+[ ./kernel/i386/thread.h ]
+Added i386_machine_state.
+[91/01/03  22:05:01  rpd]
+
+Reorganized the pcb.
+[90/12/11            rpd]
+[ ./kernel/i386/trap.c ]
+Only need csw_needed in AST exit path.
+[90/12/27            rpd]
+
+Replaced thread_doexception with new exception interface.
+[90/12/21            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/i386at/if_3c501.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/i386at/if_pc586.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/i386at/if_wd8003.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/i386ipsc/if_cnp.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/intel/pmap.c ]
+Changed pmap_collect to ignore the kernel pmap.
+[91/01/03            rpd]
+[ ./kernel/ipc/ipc_entry.c ]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ipc/ipc_entry.h ]
+Removed MACH_IPC_GENNOS, IE_BITS_UNUSEDC, IE_BITS_UNUSEDG.
+[90/11/08            rpd]
+[ ./kernel/ipc/ipc_hash.c ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+[ ./kernel/ipc/ipc_hash.h ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+[ ./kernel/ipc/ipc_init.c ]
+Changed zchange calls to make the IPC zones non-collectable.
+[90/12/29            rpd]
+[ ./kernel/ipc/ipc_kmsg.c ]
+Added ipc_kmsg_free.
+[91/01/05            rpd]
+Optimized ipc_kmsg_copyout_object for send rights.
+[90/12/21            rpd]
+Changed to use new copyinmsg/copyoutmsg operations.
+Changed ipc_kmsg_get to check that the size is multiple of four.
+[90/12/05            rpd]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ipc/ipc_kmsg.h ]
+Added ipc_kmsg_free.  Generalized the notion of special message sizes.
+[91/01/05            rpd]
+Added declarations of ipc_kmsg_copyout_object, ipc_kmsg_copyout_body.
+[90/12/21            rpd]
+[ ./kernel/ipc/ipc_marequest.c ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+
+Changed zchange calls to make the IPC zones non-collectable.
+[90/12/29            rpd]
+[ ./kernel/ipc/ipc_marequest.h ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+[ ./kernel/ipc/ipc_mqueue.c ]
+Changed continuation argument to (void (*)()).
+[90/12/18            rpd]
+Reorganized ipc_mqueue_receive.
+[90/11/22            rpd]
+
+Minor cleanup.
+[90/11/11            rpd]
+[ ./kernel/ipc/ipc_mqueue.h ]
+Changed continuation argument and IMQ_NULL_CONTINUE to (void (*)()).
+[90/12/18            rpd]
+Reorganized ipc_mqueue_receive.
+[90/11/22            rpd]
+[ ./kernel/ipc/ipc_space.c ]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ipc/mach_debug.c ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ipc/mach_msg.c ]
+Added KEEP_STACKS support.
+[91/01/07            rpd]
+Changed to use thread_syscall_return.
+Added msg_receive_continue.
+[90/12/18            rpd]
+Added mach_msg_continue, mach_msg_receive_continue.
+Changes to support kernel stack discarding/hand-off.
+[90/12/09  17:29:04  rpd]
+
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/ipc/mach_msg.h ]
+Created.
+[90/11/22            rpd]
+[ ./kernel/ipc/port.h ]
+Removed MACH_IPC_GENNOS.
+[90/11/08            rpd]
+[ ./kernel/kern/exception.c ]
+Added KEEP_STACKS support.
+[91/01/08  14:11:40  rpd]
+
+Replaced thread_doexception with new, optimized exception path.
+[90/12/22            rpd]
+[ ./kernel/kern/ipc_mig.c ]
+Don't need mach_msg_rpc_from_kernel.
+[90/12/26            rpd]
+Updated ipc_mqueue_receive calls.
+[90/11/21            rpd]
+Removed MACH_IPC_GENNOS.
+[90/11/09            rpd]
+[ ./kernel/kern/ipc_sched.c ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+Added ipc_thread_switch_hits, ipc_thread_switch_misses counters.
+[91/01/03  22:07:15  rpd]
+
+Modified ipc_thread_switch to deal with pending timeouts.
+[90/12/20            rpd]
+Removed ipc_thread_go_and_block.
+Added ipc_thread_switch.
+[90/12/08            rpd]
+[ ./kernel/kern/ipc_sched.h ]
+Removed ipc_thread_go_and_block.
+Added ipc_thread_switch.
+Added continuation argument to ipc_thread_block.
+[90/12/08            rpd]
+[ ./kernel/kern/ipc_tt.c ]
+Added retrieve_task_self_fast, retrieve_thread_self_fast.
+[90/12/27            rpd]
+[ ./kernel/kern/ipc_tt.h ]
+Added retrieve_task_self_fast, retrieve_thread_self_fast.
+[90/12/27            rpd]
+[ ./kernel/kern/mach_clock.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/kern/machine.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/kern/sched_prim.c ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+Added thread_continue_calls counter.
+[91/01/03  22:07:43  rpd]
+
+Added continuation argument to thread_run.
+[90/12/11            rpd]
+Added continuation argument to thread_block/thread_continue.
+Removed FAST_CSW conditionals.
+[90/12/08            rpd]
+
+Removed thread_swap_tick.
+[90/11/11            rpd]
+[ ./kernel/kern/startup.c ]
+Swapin the startup thread and idle threads.
+[90/11/20            rpd]
+
+Removed swapout_thread.
+[90/11/11            rpd]
+[ ./kernel/kern/syscall_subr.c ]
+Added continuation argument to thread_run.
+[90/12/11            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/kern/syscall_sw.c ]
+Changed to use MACH_TRAP_STACK appropriately.
+[90/12/27  21:20:57  rpd]
+[ ./kernel/kern/syscall_sw.h ]
+Added mach_trap_stack, MACH_TRAP_STACK.
+[90/12/18            rpd]
+[ ./kernel/kern/task.c ]
+Added consider_task_collect, task_collect_scan.
+[91/01/03            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/kern/thread.c ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+Added consider_thread_collect, thread_collect_scan.
+[91/01/03            rpd]
+
+Added locking to the stack package.  Added stack_collect.
+[90/12/31            rpd]
+Changed thread_dowait to discard the stacks of suspended threads.
+[90/12/22            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Changed thread_create to make new threads be swapped.
+Changed kernel_thread to swapin the threads.
+[90/11/20            rpd]
+
+Removed stack_free/stack_alloc/etc.
+[90/11/12            rpd]
+
+Changed thread_create to let pcb_init handle all pcb initialization.
+[90/11/11            rpd]
+[ ./kernel/kern/thread.h ]
+Added saved-state fields for exceptions.
+[90/12/23            rpd]
+Added swap_func.
+[90/11/20            rpd]
+[ ./kernel/kern/thread_swap.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Removed swapout_thread, swapout_threads,
+swapout_scan, thread_swapout.
+[90/11/11            rpd]
+[ ./kernel/kern/zalloc.c ]
+Added zalloc_wasted_space.
+[91/01/06            rpd]
+Removed COLLECT_ZONE_GARBAGE.
+[91/01/03            rpd]
+
+Changed zinit to make zones by default *not* collectable.
+[90/12/29            rpd]
+Added consider_zone_gc.
+[90/11/11            rpd]
+[ ./kernel/kern/zalloc.h ]
+Removed COLLECT_ZONE_GARBAGE.  Added consider_zone_gc.
+[91/01/03            rpd]
+[ ./kernel/mach/mips/asm.h ]
+Changed EF prefix to MSS.
+[90/12/30            rpd]
+[ ./kernel/mach/mips/vm_param.h ]
+Reduced kernel stack size to one page.
+[90/11/12            rpd]
+[ ./kernel/mach_debug/hash_info.h ]
+Created.
+[91/01/02            rpd]
+[ ./kernel/mach_debug/ipc_info.h ]
+Moved ipc_info_bucket_t to mach_debug/hash_info.h.
+[91/01/02            rpd]
+[ ./kernel/mach_debug/mach_debug.defs ]
+Added host_virtual_physical_table_info.
+[91/01/02            rpd]
+[ ./kernel/mach_debug/mach_debug_types.h ]
+Added <mach_debug/hash_info.h>.
+[91/01/02            rpd]
+[ ./kernel/mips/PMAX/if_se.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/mips/PMAX/mouse.c ]
+Mouse events are now accounted for by the screen saver.
+[91/01/04  15:35:30  af]
+[ ./kernel/mips/PMAX/screen.c ]
+Added compress_mouse_events, by default FALSE.
+[91/01/08  14:14:03  rpd]
+[ ./kernel/mips/PMAX/scsi_53C94_hdw.c ]
+Added continuation argument to thread_block.
+[90/12/27            rpd]
+[ ./kernel/mips/PMAX/scsi_7061_hdw.c ]
+Catched hitachi's problem: spurious interrupt _before_
+dmain/out even got started.
+[90/12/29            af]
+Added continuation argument to thread_block.
+[90/12/27            rpd]
+[ ./kernel/mips/autoconf.c ]
+Added pcb_zone.
+[90/12/09  17:34:12  rpd]
+[ ./kernel/mips/context.h ]
+Removed TLB_SAFE_KSTACK, TLB_SAFE_KSTACK1.
+[90/12/08            rpd]
+[ ./kernel/mips/context.s ]
+Added mips_stack_base.
+[91/01/02            rpd]
+
+Split mips_machine_state off of mips_kernel_state.
+Moved stack_switch to mips/pcb.c.
+[90/12/30            rpd]
+Removed load_context_ipc, save_context.
+Added switch_task_context, switch_thread_context.
+[90/12/08            rpd]
+
+Added stack_switch, load_context_ipc.
+[90/11/29            rpd]
+
+Changed save_context/load_context for pcb reorganization.
+Removed stack wiring code from load_context.
+Disabled pmap_pcache code.
+[90/11/12            rpd]
+[ ./kernel/mips/db_interface.c ]
+Changed kdb_trap to return TRUE if it actually enters kdb.
+[90/12/23            rpd]
+Fixed to use kdbsplhigh/kdbsplx.
+[90/11/26            rpd]
+[ ./kernel/mips/db_machdep.h ]
+Added inst_load, inst_store.
+[90/11/27            rpd]
+[ ./kernel/mips/db_trace.c ]
+Quit tracing after hitting a zero pc.
+[90/12/31            rpd]
+Changed for new pcb organization.
+[90/11/12            rpd]
+[ ./kernel/mips/genassym.c ]
+Added mips_stack_base.
+[91/01/02            rpd]
+
+Changed to consistent MKS_, MSS_, MEL_, MMS_ prefixes.
+Split mips_machine_state off of mips_kernel_state.
+[90/12/30            rpd]
+Added PCB_SIZE.
+[90/11/12            rpd]
+[ ./kernel/mips/locore.s ]
+Fixed gimmeabreak to allow the user to single-step out of it.
+[91/01/06            rpd]
+Added mips_stack_base.
+[91/01/02            rpd]
+
+Split mips_machine_state off of mips_kernel_state.
+[90/12/30            rpd]
+Moved thread_exception_return to mips/trap.c.
+[90/12/23            rpd]
+
+Replaced thread_bootstrap_user, thread_bootstrap_kernel
+with thread_exception_return, thread_syscall_return.
+Updated native syscall processing for new mach_trap_table layout.
+[90/12/18            rpd]
+Changed the exception frame/pcb layout.
+[90/11/19            rpd]
+[ ./kernel/mips/mips_copyin.s ]
+Added copyinmsg, copyoutmsg.
+Fixed copyin to check correctly for user space violations.
+[90/12/05            rpd]
+[ ./kernel/mips/mips_cpu.s ]
+Updated for new symbolic field names.
+[91/01/03  22:10:08  rpd]
+
+Replaced thread_doexception with exception.
+[90/12/27  21:22:32  rpd]
+
+Added kdbsplhigh and kdbsplx.
+[90/11/26            rpd]
+
+Changed disable_fpa for new pcb organization.
+[90/11/12            rpd]
+[ ./kernel/mips/mips_init.c ]
+Changed for pcb reorganization.
+[90/11/12            rpd]
+[ ./kernel/mips/mips_instruction.c ]
+Added isa_load, isa_store.
+[90/11/27            rpd]
+[ ./kernel/mips/pcb.c ]
+Removed pcb_synch.  Added pcb_collect.
+[91/01/03            rpd]
+
+Added mips_stack_base.
+[91/01/02            rpd]
+
+Split mips_machine_state off of mips_kernel_state.
+Moved stack_switch here from mips/context.s.
+[90/12/30            rpd]
+Eliminated thread_bootstrap_user, thread_bootstrap_kernel.
+[90/12/19            rpd]
+Added pcb_alloc/pcb_free.  Use vm_page_grab/vm_page_free
+for kernel stacks.  Reorganized the pcb layout.
+Removed thread_private.
+[90/11/11            rpd]
+[ ./kernel/mips/thread.h ]
+Added mips_stack_base.
+[91/01/02            rpd]
+Split mips_machine_state off of mips_kernel_state.
+Changed mips_exception_state to mips_exception_link.
+[90/12/30            rpd]
+Added definition of MACHINE_STACK.
+[90/12/14            rpd]
+Added mips_exception_state, USER_LINK.
+[90/11/13            rpd]
+
+Changed pcb to include both mips_kernel_state and mips_saved_state.
+[90/11/11            rpd]
+[ ./kernel/mips/tlb.s ]
+Removed tlb_probe_and_wire.
+[90/11/12            rpd]
+[ ./kernel/mips/trap.c ]
+Added a couple counters to tlb_miss.
+[91/01/08  14:15:03  rpd]
+
+Disabled pcache code.
+[90/12/29            rpd]
+Replaced thread_doexception with new exception interface.
+Moved thread_exception_return here from mips/locore.s.
+It must install single-step breakpoints in the user.
+Added thread_kdb_return.
+[90/12/23            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Added support for copymsgin, copymsgout.
+[90/12/05            rpd]
+
+Changed for new pcb organization.
+[90/11/12            rpd]
+[ ./kernel/sun3/db_machdep.h ]
+Added dummy inst_load/inst_store macros.
+[91/01/06            rpd]
+[ ./kernel/sun3/locore.s ]
+Added copyinmsg, copyoutmsg aliases.
+Updated for new mach_trap_table layout.
+[91/01/06            rpd]
+[ ./kernel/sun3/pcb.c ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+
+Added empty frame on thread start for tracing.
+[89/05/25            rwd]
+
+Converted for MACH kernel.
+[88/11/03            dbg]
+[ ./kernel/sun3/thread.h ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+[ ./kernel/sun3/trap.c ]
+Added KEEP_STACKS support.
+[91/01/07            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sundev/cgtwo.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sundev/mb.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Modified for MACH_KERNEL.
+[89/03/22            dbg]
+[ ./kernel/sundev/sd.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sundev/st.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sundev/xy.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sundev/zs_async.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/sunif/if_ie.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/sunif/if_le.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/vax/db_machdep.h ]
+Added dummy inst_load/inst_store macros.
+[91/01/06            rpd]
+[ ./kernel/vax/inline/langpats.c ]
+Added copyinmsg, copyoutmsg.
+[91/01/06            rpd]
+[ ./kernel/mach_debug/mach_debug_types.defs ]
+Changed ipc_info_bucket_t to hash_info_bucket_t.
+[91/01/02            rpd]
+[ ./kernel/mips/PMAX/dz_hdw.c ]
+Modified dz_param never to use 7bits per char.
+Now we can use the serial lines even in non-raw mode,
+which means we can login, for instance.
+[90/12/31            af]
+[ ./kernel/mips/softfp.s ]
+Replaced thread_doexception with new exception interface.
+[90/12/23            rpd]
+[ ./kernel/vax/locore.s ]
+Updated for new mach_trap_table layout.
+[91/01/06            rpd]
+[ ./kernel/vax/model_dep.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vax/mscp.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Changes for MACH_KERNEL.
+[88/08/29            dbg]
+
+Compile the error printing code if (NTMSCP > 0) as well as if NET_UDA.
+Directly include <vax/mscp_umd.h>, as the Berkeley version
+won't work (and must be left intact if NET_UDA is not true).
+[88/08/29            mwyoung]
+
+Corrected include file references.
+[88/08/22            mwyoung]
+[ ./kernel/vax/pcb.c ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+[ ./kernel/vax/thread.h ]
+Added KEEP_STACKS support.
+[91/01/06            rpd]
+[ ./kernel/vax/trap.c ]
+Added KEEP_STACKS support.
+[91/01/07            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vaxif/if_ni.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/vaxif/if_uba.c ]
+Changed NET_KMSG_GET, NET_KMSG_FREE to net_kmsg_get, net_kmsg_put.
+[91/01/05            rpd]
+[ ./kernel/vaxuba/qd.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vaxuba/uba.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vaxuba/uda_umd.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vm/memory_object.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vm/vm_debug.c ]
+Added host_virtual_physical_table_info.
+[91/01/02            rpd]
+[ ./kernel/vm/vm_external.c ]
+Changed zchange calls to make the zones non-collectable.
+[90/12/29            rpd]
+[ ./kernel/vm/vm_fault.c ]
+Turned software_reference_bits on.
+[90/12/29            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Changed VM_WAIT to VM_PAGE_WAIT.
+[90/11/13            rpd]
+[ ./kernel/vm/vm_kern.c ]
+Changed VM_WAIT to VM_PAGE_WAIT.
+[90/11/13            rpd]
+[ ./kernel/vm/vm_map.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+[ ./kernel/vm/vm_object.c ]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Fixed vm_object_terminate to give vm_pageout_page busy pages.
+[90/11/22            rpd]
+
+Changed VM_WAIT to VM_PAGE_WAIT.
+[90/11/13            rpd]
+[ ./kernel/vm/vm_page.h ]
+Changed to singly-linked VP bucket chains.
+[91/01/03            rpd]
+Changed vm_wait/VM_WAIT to vm_page_wait/VM_PAGE_WAIT.
+[90/11/13            rpd]
+[ ./kernel/vm/vm_pageout.c ]
+Added net_kmsg_collect.
+[91/01/05            rpd]
+Added consider_task_collect, consider_thread_collect.
+[91/01/03            rpd]
+
+Added stack_collect.
+[90/12/31            rpd]
+Added continuation argument to thread_block.
+[90/12/08            rpd]
+
+Ensure that vm_page_free_target is at least five pages
+larger than vm_page_free_min, to avoid vm_page_wait deadlock.
+[90/11/19            rpd]
+
+Replaced swapout_threads with consider_zone_gc.
+[90/11/11            rpd]
+[ ./kernel/vm/vm_resident.c ]
+Changed to singly-linked VP bucket chains.
+[91/01/03            rpd]
+
+Removed count field from VP buckets.
+Added vm_page_info.
+[91/01/02            rpd]
+Added vm_page_grab, vm_page_release.
+Changed vm_wait/VM_WAIT to vm_page_wait/VM_PAGE_WAIT.
+[90/12/09  17:41:15  rpd]
+[ ./user/threads/i386/csw.s ]
+Don't use Times - horta doesn't like it for some reason.
+[91/01/06            rpd]
+[ ./kernel/conf/MASTER.i386 ]
+Switch wd8003 -> ns8390
+[91/01/04  12:13:52  rvb]
+[ ./kernel/conf/files.i386 ]
+Switch wd8003 -> ns8390
+[91/01/04  12:14:06  rvb]
+[ ./kernel/ddb/db_command.c ]
+Forward reference for db_fncall();
+[91/01/04  12:35:17  rvb]
+
+Add call as a synonym for ! and match for next
+[91/01/04  12:14:48  rvb]
+[ ./kernel/i386/hardclock.c ]
+EFL_VM => user_mode
+[90/12/21  10:50:54  rvb]
+[ ./kernel/i386/interrupt.s ]
+Need special interrupt_return
+[90/12/21  14:36:12  rvb]
+[ ./kernel/i386/locore.s ]
+interrupt_returns must check for EFL_VM.
+[90/12/21  14:37:44  rvb]
+
+Add trapv86 for VM thread.
+[90/12/19  17:00:56  rvb]
+[ ./kernel/i386/pit.c ]
+Flush dead EXL code.
+[90/11/27  11:38:08  rvb]
+[ ./kernel/i386/trap.c ]
+Add v86_hdw_assist().
+[91/01/04  09:54:24  rvb]
+
+Basically add trapv86()
+[90/12/20  10:21:01  rvb]
+[ ./kernel/i386/tss.h ]
+Add bit_map
+[90/12/20  10:21:17  rvb]
+[ ./kernel/i386at/blitvar.h ]
+Trim $ header
+[90/11/27  11:44:11  rvb]
+[ ./kernel/i386at/conf.c ]
+Support for get/set status on hd and fd.
+Also fd has 64 minor devices per unit.
+Switch wd8003 -> ns8390
+[91/01/04  12:17:15  rvb]
+[ ./kernel/i386at/disk.h ]
+Add V_ABS to log absolute address for 3.0 get/set stat version
+of V_RDABS AND V_WRABS
+[91/01/04  12:18:16  rvb]
+[ ./kernel/i386at/hd.c ]
+Allow ioctl's
+[90/12/19            rvb]
+[ ./kernel/i386at/if_3c503.h ]
+Etherlink II device specific info.
+[91/01/04  12:19:07  rvb]
+[ ./kernel/i386at/if_ns8390.c ]
+A few bug fixes.
+[91/01/08  16:41:04  rvb]
+
+Make this a generic driver for ns8390 from wd8003 because
+we now will also support etherlink ii.
+[91/01/04  12:25:21  rvb]
+[ ./kernel/i386at/if_ns8390.h ]
+Restrict to defines for the 8390 only.
+[91/01/04  12:25:57  rvb]
+[ ./kernel/i386at/if_wd8003.h ]
+Flush generic NS8390 defines to an NS8390 header file.
+[91/01/04  12:20:35  rvb]
+[ ./kernel/i386at/kd_mouse.c ]
+Trim $ Header
+[90/11/27  11:44:31  rvb]
+[ ./kernel/i386at/m765knl.c ]
+Add some 3.0 get/set stat stuff.
+[91/01/04  12:21:06  rvb]
+[ ./kernel/i386at/pic_isa.c ]
+Initially, do not allow clock interrupts
+[91/01/04  12:21:54  rvb]
+[ ./kernel/mach/i386/thread_status.h ]
+Two new flavors (from 2.5):
+  #define i386_FLOAT_STATE	2
+	Hacked in not presently used, but someday...
+ #define i386_ISA_PORT_MAP_STATE	3
+	Used 
+[90/12/20  10:23:34  rvb]
+[ ./kernel/i386at/if_ns8390.c ]
+Changed NET_KMSG_GET to net_kmsg_get.
+[91/01/08            rpd]
+[ ./kernel/i386at/if_wd8003.c ]
+Purged.
+[ ./include/Makefile ]
+Added i386/fp_reg.h.
+[91/01/08            rpd]
+[ ./include/Makefile ]
+Added i386at/disk.h.
+[ ./kernel/mach_debug/Makefile ]
+Purged.
+[ ./kernel/i386at/if_ns8390.c ]
+Fixed typo in ns8390probe.
+[91/01/09            rpd]
+[ ./kernel/mips/PMAX/boot/primary_boot.c ]
+For new proms, zero envp because it is bogus.  This lets
+me boot 2.5 on 3maxen again.
+[91/01/09  16:33:38  af]
+[ ./kernel/i386/pit.c ]
+Fixed clkstart to reset clock interrupt priority, etc.
+[91/01/09            rpd]
+
+Flush dead EXL code.
+[90/11/27  11:38:08  rvb]
+[ ./kernel/mips/PMAX/mips_box.c ]
+Defined pmax_memcheck() and related default implementation.
+[91/01/03  02:10:32  af]
+[ ./kernel/mips/PMAX/mips_box.h ]
+Now define mipsbox_memory_check() to cope with bus lockup
+caused by pmax SII chip.
+[91/01/02            af]
+[ ./kernel/mips/PMAX/kn01.c ]
+Added kn01_memcheck().
+[91/01/03  02:09:21  af]
+[ ./kernel/mips/PMAX/model_dep.c ]
+Set pmax_memcheck() for pmaxen.
+[91/01/03  02:12:58  af]
+[ ./kernel/mips/trap.c ]
+Check mipsbox_memory_check return value.
+[91/01/09            rpd]
+[ ./kernel/i386/db_trace.c ]
+Fixed stack tracing for threads without kernel stacks.
+[91/01/09            rpd]
+[ ./kernel/i386at/autoconf.c ]
+Converted from wd8003 to ns8390.
+[91/01/08            rpd]
+[ ./kernel/mips/db_trace.c ]
+Fixed stack tracing for threads without kernel stacks.
+[91/01/09            rpd]
+[ ./kernel/i386/cswitch.s ]
+Renamed to Load_context and Switch_task_context.
+Removed ktss munging.
+[91/01/09            rpd]
+[ ./kernel/i386/genassym.c ]
+Removed user_regs, k_stack_top.
+[91/01/09            rpd]
+[ ./kernel/i386/init.c ]
+Added ktss zone.
+[91/01/09            rpd]
+[ ./kernel/i386/locore.s ]
+Removed k_user_regs.
+[91/01/09            rpd]
+[ ./kernel/i386/pcb.c ]
+Revised the pcb yet again.
+Picked up i386_ISA_PORT_MAP_STATE flavors.
+Added load_context, switch_task_context cover functions.
+[91/01/09            rpd]
+[ ./kernel/i386/thread.h ]
+Added dummy switch_thread_context macro.
+Added ktss to i386_machine_state.
+Removed user_regs, k_stack_top.
+[91/01/09            rpd]
+[ ./kernel/i386/trap.c ]
+Fixed a merge bug.
+[91/01/09            rpd]
+    
+    
+    
+==========================================================================
+   ***** MK Version MK41  (mrt) *****
+    
+    
+Added the new Mach copyright and disclaimer to all the machine 
+independent files and the i386 and mips files. At this point
+we are allowd to distribute freely all the files needed for 
+the i386 and mips platforms.
+
+Changed personal copyrights to author notices and added author
+notices to the files in the devices, ddb and mips directories.
+I would encourage people to put author notices on any files
+that they created or will create. Please do not put personal
+copyrights on files as it casts doubt over the rights of
+Carnegie Mellon to distribute the files. 
+
+Since we will now be distributing these sources without requiring
+any licenses, please be very careful about adding any files with
+copyright notices that do not include a permission to distribute
+clause like the CMU one. If for some reason it is necessary to
+include a copyrighted file, be sure to tell me,so that I can exclude 
+it from the ftp distribution.
+
+There was no change to code in this release.
+    
+    
+    
+==========================================================================
+   ***** MK Version MK42  (mrt) *****
+    
+    
+Bug fixes:
+--- -----
+
+[I386]	Picked up Rich Draves intel/pmap.c fix to keep the i386 version
+	from hanging
+	Picked up a number of i386 changes from Bob
+
+[PMAX]	Picked up the scsi driver fix from Sandro and lots of other
+	mips specfic files.
+
+Organizational changes:
+-------------- -------
+All the libmach, theads and man sections now have the new Mach
+permissive copyright
+
+I upgraded the libmach i386 bcopy routine to reno in order to
+get a BSD permissive copyright.
+
+
+******** CUT HERE ******** summary of log messages ******** CUT HERE ********
+[ ./conf/version.edit ]
+42
+
+Changes from Rich
+[ ./kernel/intel/pmap.c ]
+Fixed pmap_expand to use vm_page_grab/VM_PAGE_WAIT.
+[91/01/12            rpd]
+[ ./kernel/ipc/ipc_right.c ]
+Fixed bug in ipc_right_copyin_check, following rchen's report.
+[91/01/26            rpd]
+******************************************************************
+Copyright changes
+[ ./kernel/conf/copyright ]
+New Mach copyright
+[ ./kernel/man/* ]
+Changed to new Mach copyright
+[91/02/12  18:10:12  mrt]
+[ ./user/libmach/* ]
+Added new Mach copyright
+[91/02/13  12:45:25  mrt]
+[ ./user/threads/* ]
+Added new Mach copyright
+[91/02/13  12:40:50  mrt]
+[ ./kernel/sys/ioctl.h ]
+Changed to new Mach copyright
+[ ./kernel/i386/ntoh.s ]
+Changed to new Mach copyright
+******************************************************************
+Mips changes from Sandro
+[ ./kernel/mips/PMAX/cfb_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  12:44:36  af]
+[ ./kernel/mips/PMAX/dz_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  12:45:12  af]
+Modified dz_param never to use 7bits per char.
+Now we can use the serial lines even in non-raw mode,
+which means we can login, for instance.
+[90/12/31            af]
+[ ./kernel/mips/PMAX/ga_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  12:43:54  af]
+[ ./kernel/mips/PMAX/gq_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  12:44:15  af]
+[ ./kernel/mips/PMAX/if_se.c ]
+In interrupt routine, drop priority as now required.
+Added (optional) loopback of packets sent to ourselves,
+this way can run multiple POEs and have them talk to each other.
+Same flag lets you run with external hardware loopback terminator
+ignoring no-carrier errors.
+Fixed bug with multiple ether boards.
+Fixed bug with loopback path shifting data incorrectly.
+[91/02/12  12:53:29  af]
+[ ./kernel/mips/PMAX/if_se_mapped.c ]
+In interrupt routine, drop priority as now required.
+Also sanity check for spurious interrupts anyways.
+[91/02/12  12:41:46  af]
+[ ./kernel/mips/PMAX/kn01.c ]
+In interrupt routines, drop priority as now required.
+[91/02/12  12:54:42  af]
+Added kn01_memcheck().
+[91/01/03  02:09:21  af]
+[ ./kernel/mips/PMAX/kn02.c ]
+Pass along the spllevel to interrupt routines.
+[91/02/12  12:40:09  af]
+[ ./kernel/mips/PMAX/mapped_scsi.c ]
+In interrupt routines, drop priority as now required.
+Also, sanity check against spurious interrupts.
+[91/02/12  13:17:21  af]
+[ ./kernel/mips/PMAX/mc_clock.c ]
+Factored out delay() function, and made it box-indep.
+Added accurate_config_delay() which calls delay()'s
+configuration code.  Modified ackrtclock() to
+invoke it on first call.
+Tell the user what the CPU clock speed loks like, 
+distinguish between DS3100 and DS2100 based on clock speed.
+[91/02/12  13:03:16  af]
+[ ./kernel/mips/PMAX/mc_clock.h ]
+New values for delay() function.
+[91/02/12  13:04:04  af]
+[ ./kernel/mips/PMAX/mips_box.c ]
+In clock interrupt routine, drop priority as now required.
+[91/02/12  12:59:26  af]
+Defined pmax_memcheck() and related default implementation.
+[91/01/03  02:10:32  af]
+[ ./kernel/mips/PMAX/mips_box.h ]
+Fix macros so that interrupt routines can drop priority as now required.
+[91/02/12  12:56:04  af]
+[ ./kernel/mips/PMAX/mouse.c ]
+Sanity check so that we will never loose synch if the serial line
+drops characters.
+[91/02/12  12:57:21  af]
+Mouse events are now accounted for by the screenm saver.
+[91/01/04  15:35:30  af]
+[ ./kernel/mips/PMAX/pm_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  12:42:39  af]
+[ ./kernel/mips/PMAX/rz_disk.c ]
+Added (optional and disabled) code for checksumming.
+[91/02/12  12:58:27  af]
+Bug in strategy routine: for xfers larger than
+max_dma was not setting the io_count right at
+the end of the transfer.  Now new fsck works.
+[90/12/10  17:26:47  af]
+[ ./kernel/mips/PMAX/scsi_53C94_hdw.c ]
+In interrupt routine, drop priority as now required.
+Also, sanity check for spurious interrupts.
+Some more debugging tools.
+[91/02/12  12:46:38  af]
+[ ./kernel/mips/autoconf.c ]
+New values for new delay() function.
+[91/02/12  12:29:29  af]
+[ ./kernel/mips/db_interface.c ]
+Added flag not to invoke vm_fault(), used in crashed kernels.
+[91/02/12  12:15:09  af]
+[ ./kernel/mips/mips_cpu.s ]
+Fixed a number of problems in the FPA emulation code.
+Added delay() and its autotime function, this way we
+can distinguish between DS3100 and DS2100.
+[91/02/12  12:37:13  af]
+[ ./kernel/mips/mips_instruction.c ]
+Added branch_delay() for FPA emulation.
+[91/02/12  12:23:19  af]
+[ ./kernel/mips/pmap.c ]
+Fixed pmap_attribute() to loop through all phys pages while
+flushing the cache.  If this gets used heavily for large
+ranges it will be wise to just flush the whole cache in
+one shot, or keep perhaps track of which 'cache pages'
+need flushing and which do not.
+[91/02/12  12:33:25  af]
+[ ./kernel/mips/pmap.h ]
+Made sure PTETOPHYS() does not get optimized away.
+[91/01/10            af]
+[ ./kernel/mips/softfp.s ]
+The FPA csr is now passed as third argument.
+[91/02/12  12:21:21  af]
+[ ./kernel/device/net_io.c ]
+Added garbage collection of dead filters.
+[91/02/12  12:11:10  af]
+[ ./kernel/mips/PMAX/scsi_7061_hdw.c ]
+In interrupt routine, drop priority as now required.
+[91/02/12  13:18:18  af]
+[ ./kernel/mips/db_trace.c ]
+Split trace function from ddb interface.  Added (optional)
+code to walk through a user-mode, optimized CThread program
+like the U*x server.  Should make it MI someday.
+[91/02/12  12:18:59  af]
+[ ./kernel/mips/locore.s ]
+Reversed the meaning of the booleans in the ref_bits array.
+[91/02/12  12:24:39  af]
+[ ./kernel/mips/trap.c ]
+Pass along the spl level to interrupt routines, which are now
+invoked with interrupts DISABLED so that they can defend 
+themselves from unwarranted multiple invocations.  It is
+now the routine's responsibility to lower the spl at the indicated
+priority level as soon as the interrupt cause has been cleared.
+[91/02/12  12:28:43  af]
+Activated mipsbox_memory_check() macro.
+[91/01/03  02:08:14  af]
+*************************************************************
+Changes from Bob
+[ ./kernel/ddb/db_input.c ]
+Add input line editing.
+[90/11/11            dbg]
+[ ./kernel/i386/trap.c ]
+rfr's latest changes to v86 assist
+[91/01/28  15:25:30  rvb]
+[ ./kernel/i386at/com.c ]
+Merge of dbg's latest working com.c onto the old com.c
+with the new autoconf and other major changes.
+[91/01/28  15:26:13  rvb]
+[ ./kernel/i386at/conf.c ]
+Allow com driver and distinguish EtherLinkII from wd8003
+[91/01/28  15:27:02  rvb]
+[ ./kernel/i386at/fd.c ]
+This file is the logical contatenation of the previous c765.c,
+m765knl.c and m765drv.c, in that order.  
+[91/01/15            rvb]
+[ ./kernel/i386at/fdreg.h ]
+New, Improved, compatible with new fd.c
+[91/01/28  15:33:58  rvb]
+[ ./kernel/i386at/if_ns8390.c ]
+Distinguish EtherLinkII vs WD8003 on open.  Get packet
+size right for statistics.  Fix 3.0 buf that sometimes
+reported packets too large.
+[91/01/28  15:31:22  rvb]
+[ ./kernel/i386at/if_pc586.c ]
+You must check RBD_SW_EOF for rbd chain termination, a link of 0xffff
+does not work.  Also we've just seen a status of 0xffff in rcv() with
+a bad fd_p->link_offset; we'll now reset.
+[91/01/17            rvb]
+[ ./kernel/i386at/kd.c ]
+Merge cleanup.
+[91/01/28  17:14:11  rvb]
+Drop priority around display routines in kdstart, so that
+scrolling or clearing the screen doesn't block other interrupts
+(e.g. com driver).
+[91/01/28  15:29:45  rvb]
+[ ./kernel/i386at/kdasm.s ]
+Follow dbg's lead.
+[91/01/15            rvb]
+

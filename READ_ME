@@ -1,0 +1,81 @@
+  The  Mach  3.0  micro-kernel provides the following functions: virtual memory
+management, inter-process communication, tasks, threads, exceptions, scheduling
+primitives and device drivers.
+
+  It  does  not  provide  a file system, tty i/o, network support or other Unix
+features like signal and Unix tasks. The pure kernel alone does not give you  a
+usable operating system.
+
+  The  ftp distribution consists of the following directories containing kernel
+sources, kernel/:
+
+boot_ufs:       A minimal file system that is used when booting and paging on a
+                disk-based file system. Reads a Mach 2.5/BSD 4.3 file system.
+
+conf:           Contains all the configuration files for building the kernel.
+
+ddb:            A  debugger  built  into  the  kernel  with  a  dbx  style user
+                interface.  See the man page in man/ddb.man  for  its  use.  It
+                will be loaded with the kernel if the debug option is chosen.
+
+device:         Files that implement the device interface of the Mach kernel.
+
+i386:           Files specific to the i386 architecture.
+
+i386at:         Files that implement i386 device drivers for an atbus machine.
+
+intel:          Pmap code that is common between i386 and i860 based machines.
+
+ipc:            Files that implement the ipc functionality of the kernel.
+
+kern:           Files  that  implement  tasks, threads, scheduling, exceptions,
+                timing, kernel memory allocation, et.al.
+
+mach:           The header files  that  define  the  machine  independent  user
+                interface to the Mach kernel.
+
+mach/i386:      The  header  files that define the i386 specific user interface
+                to the Mach kernel.
+
+mach/i860:      The header files that define the i860 specific  user  interface
+                to the Mach kernel. (The i860 sources are not available by ftp)
+
+mach/mips:      The  header  files that define the mips specific user interface
+                to the Mach kernel.
+
+mach/sun3:      The header files that define the sun3 specific  user  interface
+                to the Mach kernel. (The sun3 sources are not available by ftp)
+
+mach/vax:       The header files that define the vax specific user interface to
+                the Mach kernel.  (The vax sources are not available by ftp)
+
+mach_debug:     The  header  files  that  define  the  user  interface  to  the
+                debugging  facilities  of the Mach kernel. These interfaces are
+                only available in kernels  with  various  levels  of  debugging
+                options turned on: eg. debug, ipc_debug, vm_debug.
+
+man:            man pages for some of the Mach 3.0 kernel interfaces.
+
+mips:           Files specific to the mips R2000/3000 architecture.
+
+mips/PMAX:      File that implement drivers for the DecStation 3100/5000.
+
+mips/PMAX/boot: Files to build the boot program for the DecStation 3100/5000.
+
+src/config:     Files  to  build  the config program that is used when building
+                the kernel.
+
+src/mig:        Files to build the migcom program that is used to generate Mach
+                rpc  interfaces  to  ipc  calls.  Migcom  is used during kernel
+                builds.
+
+sys:            A few header files defining interfaces left over from 3.4 BSD.
+
+vm:             Files that implement machine independent virtual memory.
+
+  There is also one other directory:
+
+user/libmach:   Contains library routines that are need by the  kernel  or  the
+                mig  program.  This  is  a  temporary  arrangement  and will be
+                replaced by a more complete library in a different area as soon
+                as it is available.

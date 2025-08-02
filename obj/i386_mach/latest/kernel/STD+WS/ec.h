@@ -1,0 +1,1 @@
+#define EC 0

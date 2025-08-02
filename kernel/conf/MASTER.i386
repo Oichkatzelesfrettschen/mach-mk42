@@ -1,0 +1,203 @@
+#
+# Mach Operating System
+# Copyright (c) 1991,1990,1989 Carnegie Mellon University
+# All Rights Reserved.
+# 
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+# 
+# CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS 
+# CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
+# ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+# 
+# Carnegie Mellon requests users of this software to return to
+# 
+#  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
+#  School of Computer Science
+#  Carnegie Mellon University
+#  Pittsburgh PA 15213-3890
+# 
+# any improvements or extensions that they make and grant Carnegie the
+# rights to redistribute these changes.
+#  
+#
+# HISTORY
+# $Log:	MASTER.i386,v $
+# Revision 2.10  91/02/05  17:02:04  mrt
+# 	Changed to new copyright
+# 	[91/01/28  14:45:43  mrt]
+# 
+# 	Add 3com 3c501 ether [bernadat]
+# 	Add @ to <coff> SWAPSYS macro.
+# 	[90/02/28            rvb]
+# 	You must "config" vmunix, mach has nasty side effects.
+# 	SWAPSYS must be @ not to have (null command) complaint.
+# 	[90/01/23            rvb]
+# 	SWAPSYS is not coff only.
+# 	[90/01/02  13:55:45  rvb]
+# 
+# 	Flush makevariables LIBS=...-gnulib
+# 	[89/12/26            rvb]
+# 	Define WS configuration.
+# 	Make "coff" configuration for kernel vs a.out.
+# 	[89/12/21  17:10:46  rvb]
+# 
+# 	Bring back optimization.
+# 	[89/09/26            rvb]
+# 
+# Revision 2.9  91/01/08  17:31:45  rpd
+# 	Switch wd8003 -> ns8390
+# 	[91/01/04  12:13:52  rvb]
+# 
+# Revision 2.8  90/12/04  14:45:30  jsb
+# 	Eliminated ipsc2 in favor of ipsc or ipsc386 where appropriate.
+# 	[90/12/04  11:38:51  jsb]
+# 
+# Revision 2.7  90/11/26  14:48:29  rvb
+# 	Put com back.  kd_mouse needs it.
+# 	[90/11/26  11:20:42  rvb]
+# 
+# Revision 2.6  90/11/24  15:14:36  jsb
+# 	Added support for i386ipsc2 cnp ethernet driver.
+# 	[90/11/24  12:05:34  jsb]
+# 
+# Revision 2.5  90/10/01  14:22:34  jeffreyh
+# 	Added wd8003 ethernet driver
+# 	[90/09/27  18:24:50  jeffreyh]
+# 
+# Revision 2.4  90/09/23  17:45:05  jsb
+# 	Added ipsc2 support.
+# 	[90/09/21  16:36:01  jsb]
+# 
+# Revision 2.3  90/06/19  22:56:30  rpd
+# 	Added -x to LDFLAGS.
+# 	[90/06/03            rpd]
+# 
+# Revision 2.2  90/05/03  15:16:48  dbg
+# 	Config mach_kernel for pure kernel.
+# 	[90/03/30            dbg]
+# 
+# Revision 2.9  89/09/25  15:46:36  rvb
+# 	fp defaults off for now.
+# 	[89/09/25            rvb]
+# 
+# Revision 2.8  89/09/25  12:20:05  rvb
+# 	fp configurable and qt -> wt
+# 	[89/09/23            rvb]
+# 
+# Revision 2.7  89/09/20  17:26:12  rvb
+# 	Don't optimize during compiles for now.
+# 	[89/09/20            rvb]
+# 
+# Revision 2.6  89/09/09  15:19:02  rvb
+# 	Allow blit device and make more devices configureable
+# 	[89/09/07            rvb]
+# 
+# Revision 2.5  89/07/17  10:34:36  rvb
+# 	New Devices: pccom and qd.
+# 	[89/07/10            rvb]
+# 
+# Revision 2.4  89/04/05  12:57:04  rvb
+# 	Must define AT386 now in X78
+# 	Add <gcc> stuff.
+# 	[89/03/04            rvb]
+# 
+# Revision 2.3  89/02/25  17:37:51  gm0w
+# 	Changes for cleanup.
+# 
+# Revision 2.2  89/01/23  22:11:06  af
+#	Created.
+#	
+#
+#  Master I386 configuration file (see the master machine independent
+#  configuration file for a description of the file format).
+#
+#	
+#	#####################################################################
+#	
+#	  I386 (PSEUDO-)DEVICES (select any combination)
+#	
+#	  CPU TYPE (select exactly one)
+#	AT	at bus
+#	MBII	multibus II bus
+#	
+#	#####################################################################
+#	
+#	  Standard Mach Research Configurations:
+#	  -------- ---- -------- ---------------
+#	
+#	  BOOT	   = [ hd bsmall ]
+#
+#	  STD	   = [ gcc ]
+#	
+#	  MACH     = [ en ]
+#	
+#	  WS	   = [ at hd com blit fd pc586 qd wt 3c wd]
+#
+#	  iPSC     = [ ipsc sd usm dcm cnp ]
+#
+#	#####################################################################
+#
+
+machine		"i386"		# <at,exl,ipsc>
+cpu		"AT386"		# <at>
+options		"AT386"		# <at>
+cpu		"iPSC386"	# <ipsc>
+options		"iPSC386"	# <ipsc>
+cpu		EXL		# <exl>
+options		EXL		# <exl>
+
+config		mach_kernel	swap generic
+
+options 	MACH_LOAD	# 
+
+#
+#  Devices
+#
+pseudo-device	blit		# <blit>
+device		hd0		# <hd>
+device		fd0		# <fd>
+device		sd0		# <sd>
+device		usm0		# <usm>
+device		dcm0		# <dcm>
+device		cnp0		# <cnp>
+pseudo-device	fp		# <fp>
+pseudo-device	"pc586"		# <pc586>
+pseudo-device	"at3c501"	# <3c,eli>
+pseudo-device	"ns8390"	# <wd,elii>
+device		com0		# <com>
+device		com1		# <com>
+device		com2		# <com>
+device		com3		# <com>
+##device		qd0		# <qd>
+##device		qd1		# <qd>
+##device		wt0		# <wt>
+
+
+#
+#	OVERRIDES FOR GCC
+#
+
+makevariables	CC="	gcc"					# <!coff>
+makevariables	GAS="	gas"					# <!coff>
+makevariables	LDFLAGS="-x -e _pstart -T c0100000"		# <!coff>
+makevariables	SWAPSYS="@"					# <!coff>
+
+makevariables	INCLUDES="-Dwheeze"				# <coff>
+makevariables	CC="	fgcc"					# <coff>
+makevariables	AS="	/lib/fgcc-as"				# <coff>
+makevariables	LD="	/lib/fgcc-ld"				# <coff>
+makevariables	LDFLAGS="-e pstart ../i386/vuifile"		# <coff>
+makevariables	SWAPSYS="@echo add debugging symbols; unixsyms a.out" # <coff>
+
+
+makevariables	VOLATILE=					# <gcc>
+makevariables	FORCE_VOLATILE="-fvolatile "	 		# <gcc>
+makevariables	"C_RULE_1A"="${KCC} -c ${CFLAGS} -fno-function-cse " # <gcc>
+makevariables	"C_RULE_2"=					# <gcc>
+makevariables	"C_RULE_3"=					# <gcc>
+makevariables	"C_RULE_4"=					# <gcc>
+

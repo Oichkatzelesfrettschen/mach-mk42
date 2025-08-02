@@ -1,0 +1,1 @@
+#define NUSM 0

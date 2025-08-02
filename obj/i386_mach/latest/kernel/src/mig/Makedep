@@ -1,0 +1,71 @@
+# Dependencies for File: error.o:
+error.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+error.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+error.o: ../../sys/types.h /usr/include/mach_error.h /usr/include/stdio.h
+error.o: /usr/include/strings.h /usr/local/gnu/lib/gcc-include/varargs.h
+error.o: error.c error.h global.h string.h
+# Dependencies for File: global.o:
+global.o: ../../mach/boolean.h ../../mach/machine/boolean.h ../../sys/types.h
+global.o: /usr/include/strings.h global.c global.h string.h
+# Dependencies for File: header.o:
+header.o: ../../mach/boolean.h ../../mach/machine/boolean.h ../../sys/types.h
+header.o: /usr/include/stdio.h /usr/include/strings.h global.h header.c
+header.o: routine.h statement.h string.h type.h utils.h write.h
+# Dependencies for File: lexxer.o:
+lexxer.o: ../../mach/boolean.h ../../mach/kern_return.h
+lexxer.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+lexxer.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+lexxer.o: /usr/include/stdio.h /usr/include/strings.h global.h lexxer.c
+lexxer.o: lexxer.h parser.h routine.h statement.h string.h type.h
+# Dependencies for File: mig.o:
+mig.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+mig.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+mig.o: ../../sys/types.h /usr/include/mach_error.h /usr/include/stdio.h
+mig.o: /usr/include/strings.h error.h global.h lexxer.h mig.c routine.h
+mig.o: statement.h string.h type.h write.h
+# Dependencies for File: parser.o:
+parser.o: ../../mach/boolean.h ../../mach/machine/boolean.h ../../sys/types.h
+parser.o: /usr/include/strings.h global.h lexxer.h parser.c routine.h
+parser.o: statement.h string.h type.h
+# Dependencies for File: routine.o:
+routine.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+routine.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+routine.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+routine.o: /usr/include/mach_error.h /usr/include/strings.h alloc.h error.h
+routine.o: global.h routine.c routine.h string.h type.h
+# Dependencies for File: server.o:
+server.o: ../../mach/boolean.h ../../mach/kern_return.h
+server.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+server.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+server.o: /usr/include/stdio.h /usr/include/strings.h global.h routine.h
+server.o: server.c statement.h string.h type.h utils.h write.h
+# Dependencies for File: statement.o:
+statement.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+statement.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+statement.o: ../../sys/types.h /usr/include/mach_error.h /usr/include/strings.h
+statement.o: alloc.h error.h routine.h statement.c statement.h string.h type.h
+# Dependencies for File: string.o:
+string.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+string.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+string.o: ../../sys/types.h /usr/include/mach_error.h /usr/include/strings.h
+string.o: alloc.h error.h string.c string.h
+# Dependencies for File: type.o:
+type.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+type.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+type.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+type.o: /usr/include/mach_error.h /usr/include/strings.h alloc.h error.h
+type.o: global.h string.h type.c type.h
+# Dependencies for File: user.o:
+user.o: ../../mach/boolean.h ../../mach/error.h ../../mach/kern_return.h
+user.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+user.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+user.o: /usr/include/mach_error.h /usr/include/stdio.h /usr/include/strings.h
+user.o: error.h global.h routine.h statement.h string.h type.h user.c utils.h
+user.o: write.h
+# Dependencies for File: utils.o:
+utils.o: ../../mach/boolean.h ../../mach/kern_return.h
+utils.o: ../../mach/machine/boolean.h ../../mach/machine/kern_return.h
+utils.o: ../../mach/message.h ../../mach/port.h ../../sys/types.h
+utils.o: /usr/include/stdio.h /usr/include/strings.h
+utils.o: /usr/local/gnu/lib/gcc-include/varargs.h routine.h statement.h
+utils.o: string.h type.h utils.c utils.h write.h

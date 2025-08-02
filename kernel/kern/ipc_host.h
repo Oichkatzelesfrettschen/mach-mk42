@@ -1,0 +1,96 @@
+/* 
+ * Mach Operating System
+ * Copyright (c) 1991,1990,1989,1988 Carnegie Mellon University
+ * All Rights Reserved.
+ * 
+ * Permission to use, copy, modify and distribute this software and its
+ * documentation is hereby granted, provided that both the copyright
+ * notice and this permission notice appear in all copies of the
+ * software, derivative works or modified versions, and any portions
+ * thereof, and that both notices appear in supporting documentation.
+ * 
+ * CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS 
+ * CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
+ * ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+ * 
+ * Carnegie Mellon requests users of this software to return to
+ * 
+ *  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
+ *  School of Computer Science
+ *  Carnegie Mellon University
+ *  Pittsburgh PA 15213-3890
+ * 
+ * any improvements or extensions that they make and grant Carnegie the
+ * rights to redistribute these changes.
+ */
+/*
+ * HISTORY
+ * $Log:	ipc_host.h,v $
+ * Revision 2.3  91/02/05  17:26:34  mrt
+ * 	Changed to new Mach copyright
+ * 	[91/02/01  16:12:40  mrt]
+ * 
+ * Revision 2.2  90/06/02  14:54:04  rpd
+ * 	Created for new IPC.
+ * 	[90/03/26  23:46:41  rpd]
+ * 
+ * 	Merge to X96
+ * 	[89/08/02  22:55:33  dlb]
+ * 
+ * 	Created.
+ * 	[88/12/01            dlb]
+ * 
+ * Revision 2.3  89/10/15  02:04:36  rpd
+ * 	Minor cleanups.
+ * 
+ * Revision 2.2  89/10/11  14:07:24  dlb
+ * 	Merge.
+ * 	[89/09/01  17:25:42  dlb]
+ * 
+ */ 
+
+#ifndef	_KERN_IPC_HOST_H_
+#define	_KERN_IPC_HOST_H_
+
+#include <mach/port.h>
+
+extern void ipc_host_init();
+
+extern void ipc_processor_init();
+extern void ipc_processor_enable();
+extern void ipc_processor_disable();
+extern void ipc_processor_terminate();
+
+extern void ipc_pset_init();
+extern void ipc_pset_enable();
+extern void ipc_pset_disable();
+extern void ipc_pset_terminate();
+
+extern struct host *
+convert_port_to_host(/* mach_port_t */);
+
+extern mach_port_t
+convert_host_to_port(/* host_t */);
+
+extern struct host *
+convert_port_to_host_priv(/* mach_port_t */);
+
+extern struct processor *
+convert_port_to_processor(/* mach_port_t */);
+
+extern mach_port_t
+convert_processor_to_port(/* processor_t */);
+
+extern struct processor_set *
+convert_port_to_pset(/* mach_port_t */);
+
+extern mach_port_t
+convert_pset_to_port(/* processor_set_t */);
+
+extern struct processor_set *
+convert_port_to_pset_name(/* mach_port_t */);
+
+extern mach_port_t
+convert_pset_name_to_port(/* processor_set_t */);
+
+#endif	_KERN_IPC_HOST_H_

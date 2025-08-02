@@ -1,0 +1,165 @@
+#
+# Mach Operating System
+# Copyright (c) 1991,1990,1989,1988 Carnegie Mellon University
+# All Rights Reserved.
+# 
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+# 
+# CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS 
+# CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
+# ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+# 
+# Carnegie Mellon requests users of this software to return to
+# 
+#  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
+#  School of Computer Science
+#  Carnegie Mellon University
+#  Pittsburgh PA 15213-3890
+# 
+# any improvements or extensions that they make and grant Carnegie the
+# rights to redistribute these changes.
+#  
+# HISTORY
+# $Log:	MASTER.mips,v $
+# Revision 2.10  91/02/05  17:02:23  mrt
+# 	Changed to new copyright
+# 	[91/01/28  14:46:07  mrt]
+# 
+# Revision 2.9  91/01/08  15:08:48  rpd
+# 	Disabled ref_bits.  Again.
+# 	[91/01/04            rpd]
+# 
+# Revision 2.8  90/12/05  23:27:20  af
+# 	Merge problems.
+# 
+# Revision 2.7  90/12/05  20:42:04  af
+# 	Split and documented the various screen drivers tags.
+# 
+# 	Earthquake for new, copyright free PMAX device drivers.
+# 	I tried to make things a little bit flexible and
+# 	'standard looking': there is now here a pseudo-device
+# 	declaration for each major piece of PMAX hardware
+# 	rather than just the switches in the STD.. configs.
+# 	Note that the "gx" driver is a collective name for
+# 	the fancy 2d/3d graphics options on 3maxen.
+# 
+# 	Added <kmax> conditional for 3maxen, use it to identify
+# 	files that are not needed elsewhere [not that you can really
+# 	cut them all out yet].
+# 
+# 	Enabled ref_bits.
+# 	Added R3000 and fixed old R2000 defs for supported cpus.
+# 
+# 	Configure two ethernet boards by default to accomodate
+# 	3maxen where the thick ether is a separate option board.
+# 	[90/12/03  22:52:29  af]
+# 
+# Revision 2.6  90/10/12  18:07:17  rpd
+# 	Removed ref_bits from STD.  The new software reference bit
+# 	code works better.
+# 	[90/10/09            rpd]
+# 
+# Revision 2.5  90/09/28  16:35:59  jsb
+# 	Made reference bits standard.
+# 	[90/09/21            rpd]
+# 
+# Revision 2.4  90/06/02  14:45:57  rpd
+# 	Added TRAP_HISTORY (tag "thist").
+# 	[90/05/12            rpd]
+# 	Compile with -g3 to get symbol table info.
+# 	[90/04/23            rpd]
+# 	Cleaned up.
+# 	[90/03/26  21:34:18  rpd]
+# 
+# Revision 2.3  90/01/22  23:04:21  af
+# 	I finally understood (I think) how this magic config process
+# 	works, so I cleaned up a little this file.  Three types of
+# 	basic configurations are defined now: a stable one (ANY & friends),
+# 	a more experimental one (TEST & friends), and one that really
+# 	does not work yet (NOTYET) because it contains being-developped
+# 	code.
+# 	[89/12/14            af]
+# 
+# Revision 2.2  89/11/29  14:08:01  af
+# 	Long overdue fix: pm ->pmdev not to conflict with pagemap option.
+# 	[89/10/29  14:25:43  af]
+# 
+# 	Fixed for pure kernel, removed MSERIES support and related
+# 	copyright restrictions.
+# 	[89/10/28            af]
+# 
+# Revision 2.4.2.1  89/09/25  11:28:53  af
+# 	Made assembly silent.
+# 
+# Revision 2.5  89/09/25  22:20:20  mja
+# 	Add standard ANY, WS and MF macros (same as PMAX for now).
+# 	[89/09/22  18:00:07  mja]
+# 
+# Revision 2.4  89/05/30  17:04:56  rvb
+# 	Add PMAX.
+
+#	STD	= [ mips_code ]
+#
+#	ANY	= [ pmax kmax kmin ]
+#	WS	= [ pmax kmax kmin ]
+#	MF	= [ pmax kmax kmin ]
+#
+machine		mips
+
+cpu		"R2000"						# <pmax>
+cpu		"R3000"						# <kmax>
+config		mach_kernel	swap generic			# <pmax>
+
+options		PMAX						# <pmax>
+
+options		REF_BITS					# <ref_bits>
+options		MIPS_CODE					# <mips_code>
+options		COMPACTED					# <mod_bits>
+options		COUNTERS					# <measure>
+options		TRAP_HISTORY					# <thist>
+
+makeoptions	ENDIAN="-EL"					# <pmax>
+makeoptions	GPSIZE=32					# <pmax>
+makeoptions	CC="cc"
+makeoptions	LD="ld"
+makeoptions	SIZE="size"
+makeoptions	CCOPTS="-O2 -g3"
+makeoptions	ASOPTS="-w"
+
+#
+#		PMAX DEVICES
+#
+pseudo-device	pmax						# <pmax>
+
+# MC146818 clock chip
+pseudo-device	mc			1			# <pmax>
+
+# DC7085 serial line controller (console)
+pseudo-device	dz			1			# <pmax>
+
+# LK201 keyboard driver
+pseudo-device	lk			1			# <pmax>
+
+# Bitmapped screen(s):
+#	bm	is the generic bitmapped screen layer
+#	fb	is the pmax monochrome/color framebuffer
+#	cfb	is the 3max simple color framebuffer (needs fb)
+#	gx	is the driver for the 2d/3d graphic engines
+pseudo-device	bm						# <pmax>
+pseudo-device	fb						# <pmax,kmax>
+pseudo-device	cfb						# <kmax>
+pseudo-device	gx						# <kmax>
+
+# AMD7990 ethernet controller
+pseudo-device	se			2			# <pmax>
+
+# SCSI driver
+pseudo-device	scsi						# <pmax>
+# DC7061 SCSI HBA
+pseudo-device	sii			1			# <pmax>
+# NCR 53C94 SCSI HBA
+pseudo-device	asc			1			# <pmax>
