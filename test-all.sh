@@ -53,7 +53,12 @@ echo ""
 # Check size (portable across Linux and BSD)
 if command -v stat &> /dev/null; then
     SIZE=$(stat -c "%s" "$KERNEL" 2>/dev/null || stat -f "%z" "$KERNEL" 2>/dev/null)
-    echo "Kernel Size: $SIZE bytes ($(echo "scale=2; $SIZE/1024" | bc 2>/dev/null || echo "unknown") KB)"
+    if [ -n "$SIZE" ]; then
+        SIZE_KB=$((SIZE / 1024))
+        echo "Kernel Size: $SIZE bytes ($SIZE_KB KB)"
+    else
+        echo "Kernel Size: (unable to determine)"
+    fi
 else
     echo "Kernel Size: (stat command not available)"
 fi
@@ -96,7 +101,16 @@ else
         export KERNEL="$KERNEL"
         export QEMU_TIMEOUT=30
         export USE_ISO=0
-        /workspace/boot-qemu.sh || echo "⚠ Boot test completed with warnings (a.out format limitation)"
+        if /workspace/boot-qemu.sh; then
+            echo "✓ Direct boot successful"
+        else
+            EXIT_CODE=$?
+            if [ $EXIT_CODE -eq 2 ]; then
+                echo "⚠ Direct boot not supported (a.out format) - use ISO method"
+            else
+                echo "✗ Boot test failed with exit code $EXIT_CODE"
+            fi
+        fi
     fi
 fi
 

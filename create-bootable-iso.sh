@@ -54,10 +54,14 @@ EOF
 
 # Create ISO
 echo "Creating bootable ISO..."
-if grub-mkrescue -o "$ISO_FILE" "$ISO_DIR" 2>&1 | tee iso-build.log | grep -v "DOS partition"; then
-    rm -f iso-build.log
+grub-mkrescue -o "$ISO_FILE" "$ISO_DIR" > iso-build.log 2>&1
+if [ $? -eq 0 ]; then
+    echo "ISO created successfully"
+    # Keep log for debugging if needed
 else
-    echo "Warning: ISO creation had errors. Check iso-build.log for details."
+    echo "Error: ISO creation failed"
+    cat iso-build.log
+    exit 1
 fi
 
 # Cleanup

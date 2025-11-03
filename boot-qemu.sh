@@ -101,7 +101,7 @@ case $EXIT_CODE in
         echo "The a.out executable format is not supported by QEMU's direct kernel loading."
         echo "Try creating a bootable ISO: ./create-bootable-iso.sh"
         echo "Then boot with: ./boot-qemu-iso.sh"
-        exit 0  # Don't fail - this is expected limitation of a.out format
+        exit 2  # Exit with specific code for a.out format limitation
         ;;
     124)
         echo "⏱ Timeout reached (expected - kernel loaded but needs user-space)"
