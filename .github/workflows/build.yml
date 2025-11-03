@@ -7,9 +7,16 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build-kernel:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      actions: write  # For artifact upload
     
     steps:
     - name: Checkout repository
@@ -43,6 +50,10 @@ jobs:
   test-in-qemu:
     needs: build-kernel
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      actions: read  # For artifact download
     
     steps:
     - name: Checkout repository
