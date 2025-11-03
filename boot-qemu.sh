@@ -97,10 +97,11 @@ case $EXIT_CODE in
         echo "✓ Kernel exited cleanly"
         ;;
     1)
-        echo "⚠ QEMU error (a.out format may not be directly bootable)"
+        echo "⚠ QEMU error - a.out format cannot be directly booted by QEMU's -kernel option"
+        echo "The a.out executable format is not supported by QEMU's direct kernel loading."
         echo "Try creating a bootable ISO: ./create-bootable-iso.sh"
         echo "Then boot with: ./boot-qemu-iso.sh"
-        exit 0  # Don't fail - this is expected for a.out
+        exit 0  # Don't fail - this is expected limitation of a.out format
         ;;
     124)
         echo "⏱ Timeout reached (expected - kernel loaded but needs user-space)"

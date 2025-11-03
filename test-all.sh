@@ -50,9 +50,13 @@ echo "Binary Format:"
 file "$KERNEL"
 echo ""
 
-# Check size
-SIZE=$(stat -f "%z" "$KERNEL" 2>/dev/null || stat -c "%s" "$KERNEL" 2>/dev/null)
-echo "Kernel Size: $SIZE bytes ($(echo "scale=2; $SIZE/1024" | bc 2>/dev/null || echo "unknown") KB)"
+# Check size (portable across Linux and BSD)
+if command -v stat &> /dev/null; then
+    SIZE=$(stat -c "%s" "$KERNEL" 2>/dev/null || stat -f "%z" "$KERNEL" 2>/dev/null)
+    echo "Kernel Size: $SIZE bytes ($(echo "scale=2; $SIZE/1024" | bc 2>/dev/null || echo "unknown") KB)"
+else
+    echo "Kernel Size: (stat command not available)"
+fi
 echo ""
 
 # Check if it's executable

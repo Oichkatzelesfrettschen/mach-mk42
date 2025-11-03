@@ -12,6 +12,11 @@ qemu-*.log
 *.qcow2
 *.img
 
+# ISO build artifacts
+*.iso
+iso_build/
+iso-build.log
+
 # Test artifacts
 artifacts/
 
