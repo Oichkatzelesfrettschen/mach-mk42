@@ -1,0 +1,52 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.out
+*.log
+*.tmp
+
+# Kernel build directories
+obj/
+release/
+
+# Binary outputs
+mach_kernel
+vmunix
+
+# Generated configuration files
+kernel/*/Makefile
+kernel/*/make
+kernel/*/pmake
+kernel/*/Makeconf
+kernel/*/vers.c
+kernel/*/vers.config
+kernel/*/vers.suffix
+kernel/*/*/Makefile
+kernel/*/*/make
+kernel/*/*/Makeconf
+
+# Generated tool binaries
+bin/config
+bin/mig
+bin/buildconf
+lib/migcom
+
+# Temporary directories
+tmp/
+.tmp/
+
+# Editor and IDE files
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore

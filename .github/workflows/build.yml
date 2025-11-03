@@ -1,0 +1,97 @@
+name: Build Mach MK42 Kernel
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build Docker image
+      run: |
+        docker build -t mach-mk42-builder .
+        
+    - name: Build Mach kernel in Docker
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:/workspace \
+          mach-mk42-builder \
+          /bin/bash -c "/workspace/build-kernel.sh"
+          
+    - name: Upload kernel artifact
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: mach-kernel-binary
+        path: |
+          obj/**/mach_kernel
+          **/mach_kernel
+        if-no-files-found: warn
+        retention-days: 30
+
+  test-in-qemu:
+    needs: build-kernel
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install QEMU
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y qemu-system-x86
+        
+    - name: Download kernel artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: mach-kernel-binary
+        
+    - name: Display kernel info
+      run: |
+        echo "=== Kernel binary information ==="
+        find . -name "mach_kernel" -type f -exec file {} \;
+        find . -name "mach_kernel" -type f -exec ls -lh {} \;
+        
+    - name: Boot kernel in QEMU (i386)
+      run: |
+        # Find the kernel binary
+        KERNEL=$(find . -name "mach_kernel" -type f | head -1)
+        
+        if [ -z "$KERNEL" ]; then
+          echo "No kernel binary found!"
+          exit 1
+        fi
+        
+        echo "=== Attempting to boot kernel in QEMU ==="
+        echo "Kernel: $KERNEL"
+        
+        # Try to boot the kernel in QEMU with a timeout
+        # This is mostly a smoke test to see if the kernel is valid
+        timeout 30s qemu-system-i386 \
+          -kernel "$KERNEL" \
+          -nographic \
+          -m 64M \
+          -no-reboot \
+          -serial stdio || EXIT_CODE=$?
+        
+        # Exit code 124 means timeout (expected for kernel without init)
+        # Exit code 0 means clean exit
+        if [ "${EXIT_CODE:-0}" -eq 124 ] || [ "${EXIT_CODE:-0}" -eq 0 ]; then
+          echo "=== QEMU test completed (kernel loaded) ==="
+          exit 0
+        else
+          echo "=== QEMU failed with exit code ${EXIT_CODE} ==="
+          exit ${EXIT_CODE}
+        fi
