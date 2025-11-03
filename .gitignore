@@ -74,3 +74,14 @@ tmp/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Roadmap build artifacts
+../mach-repos/
+build/
+toolchain/bin/
+toolchain/lib/
+rootfs.img
+*.tar.gz
+
+# Downloaded sources
+downloads/

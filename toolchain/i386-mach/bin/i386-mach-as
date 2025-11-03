@@ -1,0 +1,3 @@
+#!/bin/bash
+# Wrapper for Mach i386 assembler
+exec as --32 "$@"
