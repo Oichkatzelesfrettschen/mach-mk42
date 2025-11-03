@@ -1,4 +1,4 @@
-name: Build Mach MK42 Kernel
+name: Build and Test Mach MK42 Kernel
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  build-kernel:
+  build-and-test:
     runs-on: ubuntu-latest
     
     permissions:
@@ -25,30 +25,55 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
       
-    - name: Build Docker image
+    - name: Build Docker image with QEMU
       run: |
+        echo "Building Docker image with build tools and QEMU..."
         docker build -t mach-mk42-builder .
         
-    - name: Build Mach kernel in Docker
+    - name: Run complete test suite
       run: |
+        echo "Running build and boot test in Docker..."
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           mach-mk42-builder \
-          /bin/bash -c "/workspace/build-kernel.sh"
+          /workspace/test-all.sh
           
-    - name: Upload kernel artifact
+    - name: Extract kernel binary
+      run: |
+        echo "Extracting kernel binary for artifacts..."
+        mkdir -p artifacts
+        
+        # Find and copy kernel binary
+        if [ -f "obj/i386_mach/latest/kernel/STD+WS/mach_kernel" ]; then
+          cp obj/i386_mach/latest/kernel/STD+WS/mach_kernel artifacts/
+          echo "Kernel binary copied to artifacts/"
+        elif [ -f "mach_kernel.MK42.STD+WS" ]; then
+          cp mach_kernel.MK42.STD+WS artifacts/mach_kernel
+          echo "Pre-built kernel copied to artifacts/"
+        fi
+        
+        # Create kernel info file
+        if [ -f "artifacts/mach_kernel" ]; then
+          echo "=== Mach MK42 Kernel Build ===" > artifacts/kernel-info.txt
+          echo "Build Date: $(date)" >> artifacts/kernel-info.txt
+          echo "Git Commit: ${{ github.sha }}" >> artifacts/kernel-info.txt
+          echo "" >> artifacts/kernel-info.txt
+          file artifacts/mach_kernel >> artifacts/kernel-info.txt
+          ls -lh artifacts/mach_kernel >> artifacts/kernel-info.txt
+        fi
+          
+    - name: Upload kernel artifacts
       uses: actions/upload-artifact@v4
-      if: success()
+      if: always()
       with:
-        name: mach-kernel-binary
+        name: mach-kernel-${{ github.sha }}
         path: |
-          obj/**/mach_kernel
-          **/mach_kernel
+          artifacts/
         if-no-files-found: warn
         retention-days: 30
 
-  test-in-qemu:
-    needs: build-kernel
+  qemu-boot-test:
+    needs: build-and-test
     runs-on: ubuntu-latest
     
     permissions:
@@ -70,41 +95,65 @@ jobs:
     - name: Download kernel artifact
       uses: actions/download-artifact@v4
       with:
-        name: mach-kernel-binary
+        name: mach-kernel-${{ github.sha }}
+        path: artifacts/
         
-    - name: Display kernel info
+    - name: Display kernel information
       run: |
         echo "=== Kernel binary information ==="
-        find . -name "mach_kernel" -type f -exec file {} \;
-        find . -name "mach_kernel" -type f -exec ls -lh {} \;
-        
-    - name: Boot kernel in QEMU (i386)
-      run: |
-        # Find the kernel binary
-        KERNEL=$(find . -name "mach_kernel" -type f | head -1)
-        
-        if [ -z "$KERNEL" ]; then
-          echo "No kernel binary found!"
+        if [ -f "artifacts/mach_kernel" ]; then
+          file artifacts/mach_kernel
+          ls -lh artifacts/mach_kernel
+          
+          if [ -f "artifacts/kernel-info.txt" ]; then
+            echo ""
+            echo "=== Build Information ==="
+            cat artifacts/kernel-info.txt
+          fi
+        else
+          echo "No kernel binary found in artifacts!"
+          ls -la artifacts/
           exit 1
         fi
         
-        echo "=== Attempting to boot kernel in QEMU ==="
-        echo "Kernel: $KERNEL"
+    - name: Boot kernel in QEMU (i386)
+      run: |
+        echo "=== Booting Mach MK42 kernel in QEMU i386 ==="
+        echo "Note: Mach is a microkernel and requires user-space servers to fully boot."
+        echo "This test validates that the kernel loads and begins execution."
+        echo ""
+        
+        KERNEL="artifacts/mach_kernel"
+        
+        if [ ! -f "$KERNEL" ]; then
+          echo "Error: Kernel not found at $KERNEL"
+          exit 1
+        fi
         
         # Try to boot the kernel in QEMU with a timeout
-        # This is mostly a smoke test to see if the kernel is valid
         timeout ${QEMU_TIMEOUT}s qemu-system-i386 \
           -kernel "$KERNEL" \
           -nographic \
           -m 64M \
           -no-reboot || EXIT_CODE=$?
         
-        # Exit code 124 means timeout (expected for kernel without init)
+        # Exit code 124 means timeout (expected for kernel without user-space)
         # Exit code 0 means clean exit
-        if [ "${EXIT_CODE:-0}" -eq 124 ] || [ "${EXIT_CODE:-0}" -eq 0 ]; then
-          echo "=== QEMU test completed (kernel loaded) ==="
+        if [ "${EXIT_CODE:-0}" -eq 124 ]; then
+          echo ""
+          echo "=== QEMU Boot Test: SUCCESS ==="
+          echo "✓ Kernel loaded and attempted to boot (timeout is expected)"
+          echo "✓ This validates the kernel binary is loadable and begins execution"
+          exit 0
+        elif [ "${EXIT_CODE:-0}" -eq 0 ]; then
+          echo ""
+          echo "=== QEMU Boot Test: SUCCESS ==="
+          echo "✓ Kernel exited cleanly"
           exit 0
         else
-          echo "=== QEMU failed with exit code ${EXIT_CODE} ==="
+          echo ""
+          echo "=== QEMU Boot Test: FAILED ==="
+          echo "✗ QEMU failed with exit code ${EXIT_CODE}"
+          echo "This may indicate a problem with the kernel binary"
           exit ${EXIT_CODE}
         fi

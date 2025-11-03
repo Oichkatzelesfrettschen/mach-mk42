@@ -6,6 +6,15 @@
 *.log
 *.tmp
 
+# QEMU logs and artifacts
+qemu.log
+qemu-*.log
+*.qcow2
+*.img
+
+# Test artifacts
+artifacts/
+
 # Kernel build directories
 obj/
 release/

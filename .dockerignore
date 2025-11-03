@@ -2,11 +2,8 @@
 .git
 .gitignore
 
-# Build artifacts (will be built inside container)
-obj/
-release/
-bin/
-lib/
+# GitHub workflows (not needed in container)
+.github/
 
 # Temporary files
 *.tmp
