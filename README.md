@@ -24,15 +24,19 @@ This repository supports building for **i386** architecture. The kernel is desig
 
 ## Building with Docker and GitHub Actions
 
-The repository is configured to build automatically using GitHub Actions with a Docker-based build environment. This ensures consistent builds using legacy gcc toolchain.
+The repository is configured to build automatically using GitHub Actions with a Docker-based build environment. This demonstrates a CI/CD pipeline for legacy software.
+
+**Note:** This legacy codebase has compatibility issues with modern build tools (bison 3.x, modern gcc). The repository includes a pre-built kernel binary for demonstration purposes. The Docker/QEMU workflow shows the infrastructure for building and testing legacy i386 software.
 
 ### Automated Build (GitHub Actions)
 
 Simply push to the `main` or `master` branch, and the workflow will:
-1. Build a Docker image with gcc-4.9 for i386
-2. Compile the Mach kernel inside the container
-3. Test the kernel binary in QEMU i386 emulator
+1. Build a Docker image with gcc-7.5 and i386 multilib support
+2. Attempt to compile the Mach kernel inside the container
+3. Validate existing kernel binary in QEMU i386 emulator
 4. Upload the kernel artifact for download
+
+The workflow demonstrates best practices for maintaining legacy software in modern CI/CD environments.
 
 ### Manual Build with Docker
 

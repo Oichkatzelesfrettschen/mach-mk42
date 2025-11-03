@@ -83,8 +83,7 @@ jobs:
           -kernel "$KERNEL" \
           -nographic \
           -m 64M \
-          -no-reboot \
-          -serial stdio || EXIT_CODE=$?
+          -no-reboot || EXIT_CODE=$?
         
         # Exit code 124 means timeout (expected for kernel without init)
         # Exit code 0 means clean exit

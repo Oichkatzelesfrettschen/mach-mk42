@@ -1,0 +1,38 @@
+ident		CMU
+options 	MACH
+options		MACH_KERNEL
+options		MACH_DEBUG
+options		MACH_IPC_COMPAT
+options		MACH_IPC_DEBUG
+options		MACH_KDB
+options		MACH_VM_DEBUG
+options		STAT_TIME
+options		XPR_DEBUG
+pseudo-device	cpus		1
+machine		"i386"
+cpu		"AT386"
+options		"AT386"
+config		mach_kernel	swap generic
+options 	MACH_LOAD
+pseudo-device	blit
+device		hd0
+device		fd0
+pseudo-device	"pc586"
+pseudo-device	"at3c501"
+pseudo-device	"ns8390"
+device		com0
+device		com1
+device		com2
+device		com3
+makevariables	CC="	gcc"
+makevariables	GAS="	gas"
+makevariables	LDFLAGS="-x -e _pstart -T c0100000"
+makevariables	SWAPSYS="@"
+makevariables	VOLATILE=
+makevariables	FORCE_VOLATILE="-fvolatile "
+makevariables	"C_RULE_1A"="${KCC} -c ${CFLAGS} -fno-function-cse "
+makevariables	"C_RULE_2"=
+makevariables	"C_RULE_3"=
+makevariables	"C_RULE_4"=
+options 	CMUCS
+options		CMUCS_DISK

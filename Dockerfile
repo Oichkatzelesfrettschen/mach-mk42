@@ -1,14 +1,19 @@
 # Dockerfile for building legacy Mach MK42 kernel
-# Uses Debian Buster with gcc-4.9 for i386 architecture
+# Uses Ubuntu 18.04 which has gcc-4.8 and better i386 support
 
-FROM debian:buster
+FROM ubuntu:18.04
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary build tools and dependencies for i386 cross-compilation
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y \
-    gcc-4.9 \
-    g++-4.9 \
+    gcc \
+    g++ \
+    gcc-multilib \
+    g++-multilib \
     binutils \
     make \
     bison \
@@ -17,13 +22,10 @@ RUN dpkg --add-architecture i386 && \
     tcsh \
     patch \
     build-essential \
+    file \
     libc6-dev:i386 \
-    libgcc-8-dev:i386 \
+    libc6-dev \
     && rm -rf /var/lib/apt/lists/*
-
-# Set gcc-4.9 as the default gcc
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100
 
 # Set up working directory
 WORKDIR /workspace
