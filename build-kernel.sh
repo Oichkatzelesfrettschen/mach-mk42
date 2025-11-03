@@ -28,24 +28,30 @@ echo ""
 # Build the config tool (may fail with modern bison)
 echo "=== Building config tool ==="
 cd src/config
-make 2>&1 | tail -20 || echo "Config tool build failed (expected with modern bison)"
+if ! make 2>&1 | tail -30; then
+    echo "Config tool build failed (expected with modern bison)"
+fi
 cd ../..
 
 # Build the mig tool (may fail with missing headers)
 echo "=== Building mig tool ==="
 cd src/mig
-make 2>&1 | tail -20 || echo "MIG tool build failed (expected without full Mach environment)"
+if ! make 2>&1 | tail -30; then
+    echo "MIG tool build failed (expected without full Mach environment)"
+fi
 cd ../..
 
 # Try to configure the kernel
 echo "=== Configuring kernel ==="
-make ${CONFIG}.doconf 2>&1 | tail -10 || echo "Configuration step failed"
-make ${CONFIG}.config 2>&1 | tail -10 || echo "Configuration generation failed"
-make ${CONFIG}.mig 2>&1 | tail -10 || echo "MIG generation failed"
+make ${CONFIG}.doconf 2>&1 | tail -15 || echo "Configuration step failed"
+make ${CONFIG}.config 2>&1 | tail -15 || echo "Configuration generation failed"
+make ${CONFIG}.mig 2>&1 | tail -15 || echo "MIG generation failed"
 
 # Try to build the kernel
 echo "=== Building kernel ==="
-make ${CONFIG}.make 2>&1 | tail -20 || echo "Kernel build step completed with errors"
+if ! make ${CONFIG}.make 2>&1 | tail -30; then
+    echo "Kernel build step completed with errors"
+fi
 
 echo ""
 echo "=== Checking for kernel binaries ==="

@@ -10,6 +10,19 @@
 obj/
 release/
 
+# Build tool directories
+kernel/bin/
+kernel/lib/
+kernel/*/bin/
+kernel/*/lib/
+
+# Configuration-specific build directories (e.g., STD+WS, BOOT, etc.)
+kernel/STD+WS/
+kernel/BOOT/
+kernel/MACH/
+kernel/WS/
+kernel/iPSC/
+
 # Binary outputs
 mach_kernel
 vmunix
