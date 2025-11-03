@@ -1,5 +1,5 @@
 # Dockerfile for building legacy Mach MK42 kernel
-# Uses Ubuntu 18.04 which has gcc-4.8 and better i386 support
+# Uses Ubuntu 18.04 with gcc-7.5 and i386 multilib support
 
 FROM ubuntu:18.04
 

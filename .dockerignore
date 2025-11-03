@@ -2,9 +2,6 @@
 .git
 .gitignore
 
-# Documentation
-*.md
-
 # Build artifacts (will be built inside container)
 obj/
 release/
