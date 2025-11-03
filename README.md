@@ -2,6 +2,27 @@
 
 This repository contains the Mach 3.0 microkernel (version MK42), a legacy operating system kernel originally developed at Carnegie Mellon University for i386 architecture.
 
+## 🎯 Project Vision
+
+Transform this historical Mach microkernel into a **fully functional operating system** with userland servers, networking, and Unix compatibility - demonstrating the complete potential of microkernel architecture.
+
+## 📋 Status & Roadmap
+
+**Current State:** ✅ Kernel boots successfully in QEMU i386 within Docker
+
+**Next Phase:** 🚧 Integrating userland servers (bootstrap, pager, Lites BSD server)
+
+See **[docs/ROADMAP.md](docs/ROADMAP.md)** for the complete 26-week plan to a fully functional system.
+
+### Quick Status
+- ✅ CI/CD with Docker + QEMU
+- ✅ GRUB multiboot boot testing
+- ✅ Automated builds & artifacts
+- ✅ Comprehensive documentation
+- 🚧 Userland server integration (in progress)
+- 📅 Networking stack (planned)
+- 📅 Complete Unix environment (planned)
+
 ## Build Status
 
 ![Build and Test Mach MK42 Kernel](https://github.com/Oichkatzelesfrettschen/mach-mk42/workflows/Build%20and%20Test%20Mach%20MK42%20Kernel/badge.svg)
@@ -293,3 +314,18 @@ This MK42 version represents a specific release of the Mach 3.0 kernel from the 
 - [Original CMU Mach Project](https://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html)
 - [Mach Kernel Principles](https://www.gnu.org/software/hurd/microkernel/mach.html)
 - [Microkernel Architecture](https://en.wikipedia.org/wiki/Microkernel)
+
+## Related Repositories
+
+This project integrates components from multiple Mach repositories:
+
+- [@nmartin0/osfmk7.3](https://github.com/nmartin0/osfmk7.3) - OSF Mach 7.3 (target kernel upgrade)
+- [@nmartin0/mach_us](https://github.com/nmartin0/mach_us) - Mach user-space servers
+- [@nmartin0/lites-1.1.u3](https://github.com/nmartin0/lites-1.1.u3) - BSD single server (updated)
+- [@nmartin0/Mach-patched-gcc](https://github.com/nmartin0/Mach-patched-gcc) - Mach-specific GCC
+- [@nmartin0/mach-mk74](https://github.com/nmartin0/mach-mk74) - Mach 7.4 kernel
+- [@nmartin0/osfmk6.1](https://github.com/nmartin0/osfmk6.1) - OSF Mach 6.1 reference
+- [@nmartin0/xMach](https://github.com/nmartin0/xMach) - Mach4 + Lites integration
+- [@nmartin0/mach_vm_descendents](https://github.com/nmartin0/mach_vm_descendents) - VM evolution
+
+See **[docs/ROADMAP.md](docs/ROADMAP.md)** for integration plan.
