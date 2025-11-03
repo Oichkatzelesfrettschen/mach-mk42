@@ -5,6 +5,10 @@
 # Don't exit on error since we expect build failures
 set +e
 
+# Error context configuration
+ERROR_CONTEXT_LINES=30
+CONFIG_CONTEXT_LINES=15
+
 echo "=== Building Mach MK42 Kernel ==="
 echo "Target Machine: ${TARGET_MACHINE:-AT386}"
 echo "Configuration: ${CONFIG:-STD+WS}"
@@ -30,7 +34,7 @@ echo ""
 # Build the config tool (may fail with modern bison)
 echo "=== Building config tool ==="
 cd src/config
-if ! make 2>&1 | tail -30; then
+if ! make 2>&1 | tail -${ERROR_CONTEXT_LINES}; then
     echo "Config tool build failed (expected with modern bison)"
 fi
 cd ../..
@@ -38,20 +42,20 @@ cd ../..
 # Build the mig tool (may fail with missing headers)
 echo "=== Building mig tool ==="
 cd src/mig
-if ! make 2>&1 | tail -30; then
+if ! make 2>&1 | tail -${ERROR_CONTEXT_LINES}; then
     echo "MIG tool build failed (expected without full Mach environment)"
 fi
 cd ../..
 
 # Try to configure the kernel
 echo "=== Configuring kernel ==="
-make ${CONFIG}.doconf 2>&1 | tail -15 || echo "Configuration step failed"
-make ${CONFIG}.config 2>&1 | tail -15 || echo "Configuration generation failed"
-make ${CONFIG}.mig 2>&1 | tail -15 || echo "MIG generation failed"
+make ${CONFIG}.doconf 2>&1 | tail -${CONFIG_CONTEXT_LINES} || echo "Configuration step failed"
+make ${CONFIG}.config 2>&1 | tail -${CONFIG_CONTEXT_LINES} || echo "Configuration generation failed"
+make ${CONFIG}.mig 2>&1 | tail -${CONFIG_CONTEXT_LINES} || echo "MIG generation failed"
 
 # Try to build the kernel
 echo "=== Building kernel ==="
-if ! make ${CONFIG}.make 2>&1 | tail -30; then
+if ! make ${CONFIG}.make 2>&1 | tail -${ERROR_CONTEXT_LINES}; then
     echo "Kernel build step completed with errors"
 fi
 

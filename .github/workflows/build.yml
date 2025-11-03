@@ -55,6 +55,9 @@ jobs:
       contents: read
       actions: read  # For artifact download
     
+    env:
+      QEMU_TIMEOUT: 30  # Timeout in seconds for QEMU boot test
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -90,7 +93,7 @@ jobs:
         
         # Try to boot the kernel in QEMU with a timeout
         # This is mostly a smoke test to see if the kernel is valid
-        timeout 30s qemu-system-i386 \
+        timeout ${QEMU_TIMEOUT}s qemu-system-i386 \
           -kernel "$KERNEL" \
           -nographic \
           -m 64M \
