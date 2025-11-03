@@ -1,0 +1,27 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+*.md
+
+# Build artifacts (will be built inside container)
+obj/
+release/
+bin/
+lib/
+
+# Temporary files
+*.tmp
+*.log
+*~
+*.swp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db

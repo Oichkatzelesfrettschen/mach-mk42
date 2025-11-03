@@ -131,8 +131,8 @@ Other configurations can be found in `kernel/conf/MASTER.i386`.
 The GitHub Actions workflow (`.github/workflows/build.yml`) performs:
 
 1. **Docker Build Stage:**
-   - Creates a Debian Buster container with gcc-4.9
-   - Installs i386 cross-compilation tools
+   - Creates an Ubuntu 18.04 container with gcc-7.5
+   - Installs i386 multilib cross-compilation tools
    - Sets up legacy build environment
 
 2. **Kernel Build Stage:**
