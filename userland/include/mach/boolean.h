@@ -64,9 +64,9 @@
 
 #ifndef	ASSEMBLER
 #include <mach/machine/boolean.h>
-#endif	ASSEMBLER
+#endif	/* ASSEMBLER */
 
-#endif	BOOLEAN_H_
+#endif	/* BOOLEAN_H_ */
 
 /*
  *	Define TRUE and FALSE, only if they haven't been before,
@@ -79,10 +79,10 @@
 
 #ifndef	TRUE
 #define TRUE	((boolean_t) 1)
-#endif	TRUE
+#endif	/* TRUE */
 
 #ifndef	FALSE
 #define FALSE	((boolean_t) 0)
-#endif	FALSE
+#endif	/* FALSE */
 
-#endif	(defined(KERNEL) || defined(EXPORT_BOOLEAN)) && !defined(NOBOOL)
+#endif	/* (defined(KERNEL) || defined(EXPORT_BOOLEAN)) && !defined(NOBOOL) */
