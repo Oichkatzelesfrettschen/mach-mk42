@@ -1,0 +1,87 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.out
+*.log
+*.tmp
+
+# QEMU logs and artifacts
+qemu.log
+qemu-*.log
+*.qcow2
+*.img
+
+# ISO build artifacts
+*.iso
+iso_build/
+iso-build.log
+
+# Test artifacts
+artifacts/
+
+# Kernel build directories
+obj/
+release/
+
+# Build tool directories
+kernel/bin/
+kernel/lib/
+kernel/*/bin/
+kernel/*/lib/
+
+# Configuration-specific build directories (e.g., STD+WS, BOOT, etc.)
+kernel/STD+WS/
+kernel/BOOT/
+kernel/MACH/
+kernel/WS/
+kernel/iPSC/
+
+# Binary outputs
+mach_kernel
+vmunix
+
+# Generated configuration files
+kernel/*/Makefile
+kernel/*/make
+kernel/*/pmake
+kernel/*/Makeconf
+kernel/*/vers.c
+kernel/*/vers.config
+kernel/*/vers.suffix
+kernel/*/*/Makefile
+kernel/*/*/make
+kernel/*/*/Makeconf
+
+# Generated tool binaries
+bin/config
+bin/mig
+bin/buildconf
+lib/migcom
+
+# Temporary directories
+tmp/
+.tmp/
+
+# Editor and IDE files
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Roadmap build artifacts
+../mach-repos/
+build/
+toolchain/bin/
+toolchain/lib/
+rootfs.img
+*.tar.gz
+
+# Downloaded sources
+downloads/

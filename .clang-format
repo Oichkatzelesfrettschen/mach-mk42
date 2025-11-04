@@ -1,0 +1,53 @@
+# Clang-Format Configuration for Mach MK42
+# Based on LLVM style with K&R compatibility
+
+# Base style
+BasedOnStyle: LLVM
+
+# K&R-compatible settings
+BreakBeforeBraces: Linux
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 80
+
+# Alignment
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: true
+AlignTrailingComments: true
+
+# Indentation
+IndentCaseLabels: false
+IndentPPDirectives: None
+IndentWrappedFunctionNames: false
+
+# Spacing
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+
+# Breaks
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+
+# Pointers and references
+PointerAlignment: Right
+DerivePointerAlignment: false
+
+# Comments
+ReflowComments: true
+SpacesBeforeTrailingComments: 1
+
+# Include sorting (disabled to preserve manual ordering)
+SortIncludes: false
+
+# Compatibility
+Standard: C89

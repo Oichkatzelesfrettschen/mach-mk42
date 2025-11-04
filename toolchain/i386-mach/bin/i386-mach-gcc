@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper for Mach i386 gcc
+# Currently uses system gcc with appropriate flags
+exec gcc -m32 "$@"

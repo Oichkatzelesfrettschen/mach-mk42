@@ -1,0 +1,21 @@
+# Git files
+.git
+.gitignore
+
+# GitHub workflows (not needed in container)
+.github/
+
+# Temporary files
+*.tmp
+*.log
+*~
+*.swp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
