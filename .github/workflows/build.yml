@@ -36,7 +36,7 @@ jobs:
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           mach-mk42-builder \
-          /workspace/test-all.sh
+          /workspace/scripts/test-all.sh
           
     - name: Extract kernel binary
       run: |
