@@ -7,7 +7,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 BUILD_DIR="$PROJECT_ROOT/build/mig"
-MIG_SRC="$PROJECT_ROOT/kernel/bin/mig"
+MIG_SRC="$PROJECT_ROOT/kernel/src/mig"
 
 echo "=================================================="
 echo "Phase 2B: MIG Build Completion"
